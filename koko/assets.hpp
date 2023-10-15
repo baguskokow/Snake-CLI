@@ -1,58 +1,53 @@
+#include <unistd.h>
+#include "../ncurses/ncurses.h"
+
 class Screen {
+	private: 
+		int Height;
+		int Width;
+		int VerticalPosition;
+		int HorizontalPosition;
+		const char* NameScreen;
+		//int LengthNameScreen;
+
 	public:
-		char screenSize[20][50];
+		Screen(int height, int width, int verticalPosition, int horizontalPosition, const char* nameScreen) {
+			Screen::Height = height;
+			Screen::Width = width;
+			Screen::VerticalPosition = verticalPosition;
+			Screen::HorizontalPosition = horizontalPosition;
+			Screen::NameScreen = nameScreen;
+			//Screen::LengthNameScreen = nameScreen.size();
+		}
 
-		void renderScreen() {
-			for(int i = 0; i < 20; i++) {
-				for(int j = 0; j < 1; j++) {
-					screenSize[i][j] = '#';
-					std::cout << screenSize[i][j];
-				}
+		void render() {
+			initscr();
+			WINDOW *window = newwin(Height, Width, VerticalPosition, HorizontalPosition);
+		    box(window, 0, 0);
+		    curs_set(FALSE);
+    
+		    while(true) {
+				mvwprintw(window, 0, 19, NameScreen);
+				wrefresh(window);
 
-				if(i == 0){ 
-					for(int j = 0; j < 48; j++) {
-						screenSize[0][j] = '#';
-						std::cout << screenSize[i][j];
-					}
-				}
-				
-				if(i > 0 && i < 19) {
-					for(int j = 1; j < 48; j++) {
-						screenSize[i][j] = ' ';
-						std::cout << screenSize[i][j];
-					
-						if(screenSize[i][j] == screenSize[i][47]) {
-							screenSize[i][47] = '#';
-							std::cout << screenSize[i][j];
-						} 
-					}
-				}
-
-				if (i == 19) {
-					for(int j = 0; j < 48; j++) {
-						screenSize[19][j] = '#';
-						std::cout << screenSize[i][j];
-					}
-				}	
-
-
-				std::cout << "\n";
+		    //    for(int i = 2; i < 49; i++) {
+			//		mvwprintw(window, 2, i - 1, "++++0");
+			//		//mvwprintw(MainWindow, 2, i, "++++0");
+			//		//mvwprintw(ScoreWindow, 2.5, 9.5, "0"); 
+			//		wrefresh(window);
+			//		//wrefresh(ScoreWindow);
+			//		sleep(1);
+			//	}
 			}
+			endwin();
 		}
 };
 
 
-//class Position {
-//	public:
-//	Screen map;
-//	map
-//		void
-//};
-
-
-
-
-
+class Position {
+	public:
+		 
+};
 
 
 
