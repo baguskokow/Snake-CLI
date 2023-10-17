@@ -76,14 +76,94 @@ class Snake {
 			Start.Score = ((Window.Width / 3) - TitleLength.Score) / 2; // Ex : ((50 / 3) - 9) / 2)
 		}
 
+		//char characters() {
+		//	char Food[1] = {'+'};
+		//	return Food;
+		//}
+
+		// Random Start Position
+		struct Random {
+			int vertical() {
+				std::srand(time(0));
+				int verticalLength = 18;
+				int randomVertical;
+
+				int x = std::rand() % verticalLength;
+				if(x < 2) {
+					randomVertical = x + 1;
+				} else {
+					randomVertical = x;
+				}
+				
+				return randomVertical;
+			}
+
+			int horizontal() {
+				std::srand(time(0));
+				int horizontalLength = 48;
+				int randomHorizontal;
+
+				int y = std::rand() % horizontalLength;
+				
+				if(y < 2) {
+					randomHorizontal = y + 1;
+				} else {
+					randomHorizontal = y;
+				}
+				
+				return randomHorizontal;
+			}
+		};
+
+		struct Python {
+			std::string right() {
+				std::string rightSnake = "++0";
+				return rightSnake;
+			}
+
+			std::string left() {
+				std::string leftSnake = "0++";
+				return leftSnake;
+			}
+			
+		};
+	
+	//	void print() {
+	//		Characters Python;
+	//		std::cout << Python.right() << "\n";
+	//		std::cout << Python.left() << "\n";
+	//	}
+
 		void render() {
+			Random Characters;
+			const char* Food = "+";
+			const char* HideFood = " ";
+			const char* Python = "++0";
+			const char* HidePython = "   ";
 		    box(Screen.Map, 0, 0);
 		    box(Screen.Score, 0, 0);
 		    curs_set(FALSE); 
+			int verticalPosition = Characters.vertical();
+			int horizontalPosition = Characters.horizontal();
+			
+			// Dont touch line
+			int verticalRemaining = 17 - verticalPosition;
+			int horizontalRemaining = 47 - horizontalPosition;
+			
+			//Just a Demo "Dont Touch Line"
 			while(true) {
 				mvwprintw(Screen.Map, 0, Start.Name, NameTitle);
 				mvwprintw(Screen.Score, 0, Start.Score, ScoreTitle);
+				//mvwprintw(Screen.Map, Characters.vertical(), Characters.horizontal(), Food);
 				wrefresh(Screen.Map);
+				//mvwprintw(Screen.Map, Characters.vertical(), Characters.horizontal(), HideFood);
+				for(int i = 0; i < horizontalRemaining; i++) {
+					mvwprintw(Screen.Map, verticalPosition, horizontalPosition + i, Python);
+					wrefresh(Screen.Map);
+					mvwprintw(Screen.Map, verticalPosition, horizontalPosition + i, HidePython);
+					sleep(1);
+				}
+				//mvwprintw(Screen.Map, Characters.vertical(), Characters.horizontal(), HidePython);
 				wrefresh(Screen.Score);
 				sleep(1);
 			}
