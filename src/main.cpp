@@ -6,13 +6,6 @@
 #define WINDOWVERTICALPOSITION 0
 #define WINDOWHORIZONTALPOSITION 0
 
-//Note : 
-// - Random Characters Position already finished
-// - Random Snake Character for Vertical Position also finished
-
-// To do : 
-// - Create class for character
-
 int main() {
 	initscr();
 	const char gameTitle[] = "[ Snake CLI ]";
@@ -20,6 +13,9 @@ int main() {
 	Game* Map = new Game(HEIGHT, WIDTH, WINDOWVERTICALPOSITION, WINDOWHORIZONTALPOSITION, gameTitle, scoreTitle);
 
 	Map->render();
+
+	//Characters Food;
+	//std::cout << getFood(Food);
 	
 	delete Map;
 	return 0;

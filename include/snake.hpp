@@ -5,6 +5,8 @@
 #ifndef __SNAKE
 #define __SNAKE
 
+class Characters;
+
 class Game {
 	private: 
 		// Member Property to  Windows Size
@@ -31,13 +33,27 @@ class Game {
 		int PositionName;
 		int PositionScore;
 
-	public:
+
+	public:	
+		//Characters Food;
 		Game(int, int, int, int, const char*, const char*);
-		int RandomVertical(); 
-		int RandomHorizontal();
-		void render(); //{
+		void render();
 		~Game();
 };
 
 
+class Characters {
+	private:
+		const char* Food = "+";
+
+	public: 
+		friend class Game;
+		int RandomPositionVertical();
+		int RandomPositionHorizontal();
+};
+
 #endif
+
+
+
+
