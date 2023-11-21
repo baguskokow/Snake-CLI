@@ -1,4 +1,6 @@
 #include <iostream>
+#include <functional>
+#include <vector>
 #include "../include/snake.hpp"
 
 Game::Game(int height, int width, int windowVerticalPosition, int windowHorizontalPosition, const char* gameTitle, const char* scoreTitle) {
@@ -30,16 +32,22 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	this->PositionScore = ((Width / 3) - LengthScore) / 2; // Ex : ((50 / 3) - 9) / 2)
 }
 
+Characters Food;
+
 void Game::render() {
     box(Map, 0, 0);
     box(Score, 0, 0);
     curs_set(FALSE); 
-	Characters Food;
 
 	while(true) {
 		mvwprintw(Map, 0, PositionName, NameTitle);
 		mvwprintw(Score, 0, PositionScore, ScoreTitle);
-		mvwprintw(Map, Food.RandomPositionVertical(), Food.RandomPositionHorizontal(), "+");
+		std::srand(time(0));
+		
+		//Food.getFood(Map);
+		Food.getSnake(Map);
+
+		//mvwprintw(Map, Food.RandomPositionVertical(), Food.RandomPositionHorizontal(), "+");
 		wrefresh(Map);
 		wrefresh(Score);
 		sleep(1);

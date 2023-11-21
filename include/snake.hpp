@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <string.h>
+#include <vector>
 #include "ncurses/ncurses.h"
 
 #ifndef __SNAKE
@@ -35,7 +36,6 @@ class Game {
 
 
 	public:	
-		//Characters Food;
 		Game(int, int, int, int, const char*, const char*);
 		void render();
 		~Game();
@@ -44,16 +44,19 @@ class Game {
 
 class Characters {
 	private:
-		const char* Food = "+";
+		const char* Food = "+"; // Food Character
+		std::vector<char> Snake = {'+', '+', '+', '0'}; // Default Length Snake Character
 
 	public: 
 		friend class Game;
+
 		int RandomPositionVertical();
 		int RandomPositionHorizontal();
+		void getFood(WINDOW*);
+		void getSnake(WINDOW*);
+		void removeSnake(WINDOW*);
+		
+		
 };
 
 #endif
-
-
-
-

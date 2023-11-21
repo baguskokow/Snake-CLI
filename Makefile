@@ -24,4 +24,4 @@ characters.o:
 
 clean:
 	@echo "Clearing..."
-	rm -rf build
+	@rm -rf build
