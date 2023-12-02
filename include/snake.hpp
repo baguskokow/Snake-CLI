@@ -34,9 +34,13 @@ class Game {
 		int PositionName;
 		int PositionScore;
 
+		// Default Point
+		int point = 0;
+
 
 	public:	
 		Game(int, int, int, int, const char*, const char*);
+		void UpdateScore(WINDOW*, int);
 		void render();
 		~Game();
 };

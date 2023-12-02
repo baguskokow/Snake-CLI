@@ -1,2 +1,4 @@
 ## To do :
-- Create Snake Character
+- Fix Snake Vertical Position
+- Create Remove Character
+- Create Character Move

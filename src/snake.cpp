@@ -34,18 +34,28 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 
 Characters Food;
 
+void Game::UpdateScore(WINDOW* Score, int point) {
+	std::string pointString = std::to_string(point);
+	mvwprintw(Score, 2, 7.5, pointString.c_str());
+}
+
 void Game::render() {
     box(Map, 0, 0);
     box(Score, 0, 0);
     curs_set(FALSE); 
+	int pointNow = this->point;
 
 	while(true) {
 		mvwprintw(Map, 0, PositionName, NameTitle);
 		mvwprintw(Score, 0, PositionScore, ScoreTitle);
 		std::srand(time(0));
-		
+			
 		//Food.getFood(Map);
 		Food.getSnake(Map);
+
+		//Update Score
+		UpdateScore(Score, pointNow);
+		pointNow += 1;
 
 		//mvwprintw(Map, Food.RandomPositionVertical(), Food.RandomPositionHorizontal(), "+");
 		wrefresh(Map);
