@@ -1,4 +1,6 @@
-## To do :
-- Fix Snake Vertical Position
-- Create Remove Character
-- Create Character Move
+To do :
+1. Fix Direction
+2. Showing Food Character in Map Window
+3. Update Body Length
+4. Snake died after hit it body
+5. Snake Auto Move 

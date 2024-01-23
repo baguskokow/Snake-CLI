@@ -32,38 +32,60 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	this->PositionScore = ((Width / 3) - LengthScore) / 2; // Ex : ((50 / 3) - 9) / 2)
 }
 
-Characters Food;
-
 void Game::UpdateScore(WINDOW* Score, int point) {
 	std::string pointString = std::to_string(point);
 	mvwprintw(Score, 2, 7.5, pointString.c_str());
 }
 
 void Game::render() {
-    box(Map, 0, 0);
+	keypad(stdscr, TRUE);
     box(Score, 0, 0);
     curs_set(FALSE); 
 	int pointNow = this->point;
+	bool gameOver = false;
 
-	while(true) {
+	startPosition();
+
+	while(!gameOver) {
+		int choice = getch();
+
+		switch(choice) {
+			case KEY_UP:
+				mvUp();
+				break;
+			case KEY_DOWN:
+				mvDown();
+				break;
+			case KEY_LEFT:
+				mvLeft();
+				break;
+			case KEY_RIGHT:
+				mvRight();
+				break;
+			case 'q':
+				gameOver = true;
+				break;
+			default:
+				break;
+		}
+
+		UpdatePosition();
+
 		mvwprintw(Map, 0, PositionName, NameTitle);
 		mvwprintw(Score, 0, PositionScore, ScoreTitle);
-		std::srand(time(0));
-			
-		//Food.getFood(Map);
-		Food.getSnake(Map);
 
 		//Update Score
 		UpdateScore(Score, pointNow);
 		pointNow += 1;
 
-		//mvwprintw(Map, Food.RandomPositionVertical(), Food.RandomPositionHorizontal(), "+");
+		werase(Map);
+		box(Map, 0, 0);
+
+		showCharacter(Map);
 		wrefresh(Map);
 		wrefresh(Score);
-		sleep(1);
 	}
 }
-
 
 Game::~Game() {
 	endwin();

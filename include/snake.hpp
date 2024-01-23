@@ -6,8 +6,6 @@
 #ifndef __SNAKE
 #define __SNAKE
 
-class Characters;
-
 class Game {
 	private: 
 		// Member Property to  Windows Size
@@ -37,30 +35,39 @@ class Game {
 		// Default Point
 		int point = 0;
 
+		// Size of Window Map
+		int xMax;
+		int yMax;
+
+		// Characters
+		char Food= '*'; // Food Character
+		char SnakeHead = '@'; // Snake Head
+		char SnakeBody = '+'; // Snake Body
+
+		// Default Body Length
+		int bodyLength = 4; 
+
+		// Default Position xHead & yHead
+		int xHead = 5; // Position of X Head
+		int yHead = 4; // Position of Y Head
+		
+		// Size xBody & yBody Array
+		int xBody[1000]; // Length of X body array
+		int yBody[1000]; // Length of Y body array
+
 
 	public:	
 		Game(int, int, int, int, const char*, const char*);
 		void UpdateScore(WINDOW*, int);
+		void startPosition();
+		void UpdatePosition();
+		void showCharacter(WINDOW*);
+		void mvUp();
+		void mvDown();
+		void mvRight();
+		void mvLeft();
 		void render();
 		~Game();
-};
-
-
-class Characters {
-	private:
-		const char* Food = "+"; // Food Character
-		std::vector<char> Snake = {'+', '+', '+', '0'}; // Default Length Snake Character
-
-	public: 
-		friend class Game;
-
-		int RandomPositionVertical();
-		int RandomPositionHorizontal();
-		void getFood(WINDOW*);
-		void getSnake(WINDOW*);
-		void removeSnake(WINDOW*);
-		
-		
 };
 
 #endif

@@ -4,8 +4,8 @@ LDLIBS := ncurses
 OBJECT := build/objects
 BIN := build/bin
 
-all: build main.o snake.o characters.o
-	$(CXX) $(CXX_FLAGS) $(OBJECT)/main.o $(OBJECT)/snake.o $(OBJECT)/characters.o -l$(LDLIBS) -o $(BIN)/snake
+all: build main.o snake.o characters.o control.o
+	$(CXX) $(CXX_FLAGS) $(OBJECT)/main.o $(OBJECT)/snake.o $(OBJECT)/characters.o $(OBJECT)/control.o -l$(LDLIBS) -o $(BIN)/snake
 
 build:
 	if [ ! -d build/objects ] && [ ! -d build/bin ]; then \
@@ -21,6 +21,9 @@ snake.o:
 
 characters.o:
 	$(CXX) -c src/characters.cpp $(CXX_FLAGS) -l$(LDLIBS) -o $(OBJECT)/characters.o
+
+control.o:
+	$(CXX) -c src/control.cpp $(CXX_FLAGS) -l$(LDLIBS) -o $(OBJECT)/control.o
 
 clean:
 	@echo "Clearing..."
