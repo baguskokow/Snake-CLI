@@ -1,6 +1,7 @@
 To do :
-1. Fix Direction
-2. Showing Food Character in Map Window
-3. Update Body Length
-4. Snake died after hit it body
-5. Snake Auto Move 
+1. Fix Direction [done]
+2. Print All at console (map, character, etc) when first run
+3. Showing Food Character in Map Window
+4. Update Body Length
+5. Snake died after hit it body
+6. Snake Auto Move 

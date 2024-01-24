@@ -4,6 +4,10 @@
 // Up 
 void Game::mvUp() {
 	yHead--;
+
+	yDirection = -1;
+	xDirection = 0;
+
 	if(yHead < 1) {
 		yHead = 18;
 	}
@@ -12,6 +16,10 @@ void Game::mvUp() {
 // Down
 void Game::mvDown(){
 	yHead++;
+
+	yDirection = 1;
+	xDirection = 0;
+
 	if(yHead > 18) {
 		yHead = 1;
 	}
@@ -20,6 +28,10 @@ void Game::mvDown(){
 // Left
 void Game::mvLeft() {
 	xHead--;
+
+	xDirection = -1;
+	yDirection = 0;
+
 	if(xHead < 1) {
 		xHead = 48;
 	}
@@ -28,6 +40,10 @@ void Game::mvLeft() {
 // Right
 void Game::mvRight() {
 	xHead++;
+
+	xDirection = 1;
+	yDirection = 0;
+
 	if(xHead > 48) {
 		xHead = 1;
 	}

@@ -51,17 +51,33 @@ void Game::render() {
 
 		switch(choice) {
 			case KEY_UP:
-				mvUp();
-				break;
+				if(yDirection != 1) {
+					mvUp();
+					break;
+				} else {
+					continue;
+				}
 			case KEY_DOWN:
-				mvDown();
-				break;
+				if(yDirection != -1) {
+					mvDown();
+					break;
+				} else {
+					continue;
+				}
 			case KEY_LEFT:
-				mvLeft();
-				break;
+				if(xDirection != 1) {
+					mvLeft();
+					break;
+				} else {
+					continue;
+				}
 			case KEY_RIGHT:
-				mvRight();
-				break;
+				if(xDirection != -1) {
+					mvRight();
+					break;
+				} else {
+					continue;
+				}
 			case 'q':
 				gameOver = true;
 				break;
@@ -79,6 +95,7 @@ void Game::render() {
 		pointNow += 1;
 
 		werase(Map);
+		wrefresh(Map);
 		box(Map, 0, 0);
 
 		showCharacter(Map);

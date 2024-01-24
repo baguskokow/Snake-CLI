@@ -55,6 +55,10 @@ class Game {
 		int xBody[1000]; // Length of X body array
 		int yBody[1000]; // Length of Y body array
 
+		// Direction
+		int xDirection;
+		int yDirection;
+
 
 	public:	
 		Game(int, int, int, int, const char*, const char*);
