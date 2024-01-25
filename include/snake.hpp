@@ -50,14 +50,18 @@ class Game {
 		// Default Position xHead & yHead
 		int xHead = 5; // Position of X Head
 		int yHead = 4; // Position of Y Head
+					
+		//Random Food Position
+		int yRandom;
+		int xRandom;
 		
 		// Size xBody & yBody Array
 		int xBody[1000]; // Length of X body array
 		int yBody[1000]; // Length of Y body array
 
-		// Direction
-		int xDirection;
-		int yDirection;
+		// Default Direction
+		int xDirection = 1;
+		int yDirection = 0;
 
 
 	public:	
@@ -66,6 +70,7 @@ class Game {
 		void startPosition();
 		void UpdatePosition();
 		void showCharacter(WINDOW*);
+		void generateFood(WINDOW*);
 		void mvUp();
 		void mvDown();
 		void mvRight();

@@ -29,3 +29,24 @@ void Game::showCharacter(WINDOW* Map) {
 		mvwaddch(Map, yBody[i], xBody[i], SnakeBody);
 	}
 }
+
+void Game::generateFood(WINDOW* Map) {
+	std::srand(time(0));
+
+	int xMax = 50 - 2;
+	int yMax = 20 - 2;
+
+	if(xRandom == 0 && xRandom == 0) {
+		int xRandom = std::rand() % xMax;
+		int yRandom = std::rand() % yMax;
+	}
+
+	if(yRandom < 1 || xRandom < 1) {
+		mvwaddch(Map, yRandom + 1, xRandom + 1, Food);
+	} else if(yRandom > 19 || xRandom > 49) {
+		mvwaddch(Map, yRandom - 1, xRandom - 1, Food);
+	} else {
+		mvwaddch(Map, yRandom, xRandom, Food);
+	}
+
+}
