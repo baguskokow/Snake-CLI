@@ -37,6 +37,7 @@ void Game::render() {
     box(Score, 0, 0);
     curs_set(FALSE); 
 	bool gameOver = false;
+	noecho();
 
 	startPosition();
 
@@ -76,10 +77,11 @@ void Game::render() {
 			case 'q':
 				gameOver = true;
 				break;
-			default:
+			case ' ':
 				break;
+			default:
+				continue;
 		}
-
 
 		UpdatePosition();
 
