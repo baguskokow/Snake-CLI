@@ -32,21 +32,16 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	this->PositionScore = ((Width / 3) - LengthScore) / 2; // Ex : ((50 / 3) - 9) / 2)
 }
 
-void Game::UpdateScore(WINDOW* Score, int point) {
-	std::string pointString = std::to_string(point);
-	mvwprintw(Score, 2, 7.5, pointString.c_str());
-}
-
 void Game::render() {
 	keypad(stdscr, TRUE);
     box(Score, 0, 0);
     curs_set(FALSE); 
-	int pointNow = this->point;
 	bool gameOver = false;
 
 	startPosition();
 
 	while(!gameOver) {
+
 		int choice = getch();
 
 		switch(choice) {
@@ -85,20 +80,25 @@ void Game::render() {
 				break;
 		}
 
+
 		UpdatePosition();
 
 		mvwprintw(Map, 0, PositionName, NameTitle);
 		mvwprintw(Score, 0, PositionScore, ScoreTitle);
 
-		//Update Score
-		UpdateScore(Score, pointNow);
-		pointNow += 1;
-
 		werase(Map);
-		wrefresh(Map);
 		box(Map, 0, 0);
 
 		showCharacter(Map);
+		UpdateScore(Score, point);
+		if(yRandom == 0 && xRandom == 0) {
+			yRandom = yFoodRandom();
+			xRandom = xFoodRandom();
+			generateFood(Map, yRandom, xRandom);
+		} else {
+			generateFood(Map, yRandom, xRandom);
+		}
+
 		wrefresh(Map);
 		wrefresh(Score);
 	}
