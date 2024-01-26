@@ -70,7 +70,9 @@ class Game {
 		void startPosition();
 		void UpdatePosition();
 		void showCharacter(WINDOW*);
-		void generateFood(WINDOW*);
+		void generateFood(WINDOW*, int, int);
+		int xFoodRandom();
+		int yFoodRandom();
 		void mvUp();
 		void mvDown();
 		void mvRight();

@@ -5,4 +5,4 @@ To do :
 4. Update Body Length
 5. Snake died after hit it body
 6. Snake Auto Move 
-7. Fix Score Update
+7. Fix Score Update [done]

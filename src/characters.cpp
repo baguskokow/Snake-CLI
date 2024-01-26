@@ -30,23 +30,36 @@ void Game::showCharacter(WINDOW* Map) {
 	}
 }
 
-void Game::generateFood(WINDOW* Map) {
+int Game::xFoodRandom() {
 	std::srand(time(0));
-
 	int xMax = 50 - 2;
-	int yMax = 20 - 2;
 
-	if(xRandom == 0 && xRandom == 0) {
-		int xRandom = std::rand() % xMax;
-		int yRandom = std::rand() % yMax;
-	}
-
-	if(yRandom < 1 || xRandom < 1) {
-		mvwaddch(Map, yRandom + 1, xRandom + 1, Food);
-	} else if(yRandom > 19 || xRandom > 49) {
-		mvwaddch(Map, yRandom - 1, xRandom - 1, Food);
+	int xRandom = std::rand() % xMax;
+	
+	if(xRandom < 1) {
+		return xRandom + 1;
+	} else if(xRandom > 49) {
+		return xRandom - 1;
 	} else {
-		mvwaddch(Map, yRandom, xRandom, Food);
+		return xRandom;
 	}
+}
 
+int Game::yFoodRandom() {
+	std::srand(time(0));
+	int yMax = 20 - 2;
+	
+	int yRandom = std::rand() % yMax;
+	
+	if(yRandom < 1) {
+		return yRandom + 1;
+	} else if(yRandom > 19) {
+		return yRandom - 1;
+	} else {
+		return yRandom;
+	}
+}
+
+void Game::generateFood(WINDOW* Map, int yFood, int xFood) {
+	mvwaddch(Map, yFood, xFood, Food);
 }
