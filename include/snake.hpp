@@ -23,6 +23,7 @@ class Game {
 		// Member Property to Create Windows
 		WINDOW *Map;
 		WINDOW *Score;
+		WINDOW *GameOverPopUp;
 
 		// Member Property to Get Length Windows Name
 		size_t LengthName;
@@ -64,8 +65,12 @@ class Game {
 		int yDirection = 0;
 
 
+
 	public:	
-		Game(int, int, int, int, const char*, const char*);
+		// Exit or Play Again
+		bool end = false;
+		bool playAgain = false;
+		Game(int, int, int, int, const char*);
 		void UpdateScore(WINDOW*, int);
 		void startPosition();
 		void UpdatePosition();
@@ -77,7 +82,9 @@ class Game {
 		void mvDown();
 		void mvRight();
 		void mvLeft();
-		void render();
+		bool render();
+		bool GameOver();
+		void Play();
 		~Game();
 };
 

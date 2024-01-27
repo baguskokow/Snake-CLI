@@ -8,11 +8,10 @@
 
 int main() {
 	initscr();
-	const char gameTitle[] = "[ Snake CLI ]";
 	const char scoreTitle[] = "[ Score ]";
-	Game* Map = new Game(HEIGHT, WIDTH, WINDOWVERTICALPOSITION, WINDOWHORIZONTALPOSITION, gameTitle, scoreTitle);
-	
-	Map->render();
+	Game* Map = new Game(HEIGHT, WIDTH, WINDOWVERTICALPOSITION, WINDOWHORIZONTALPOSITION, scoreTitle);
+
+	Map->Play();
 
 	delete Map;
 	return 0;
