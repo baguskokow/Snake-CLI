@@ -27,9 +27,21 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	// Game Over Pop Up Window
 	this->GameOverPopUp = newwin(10, 20, 4, 5);
 
+	// Get Terminal Size
+	getmaxyx(stdscr, rowTerminal, columnTerminal);
+
+	// Title Score Window
 	this->LengthScore = strlen(scoreTitle);
 
 	this->PositionScore = ((Width / 3) - LengthScore) / 2; // Ex : ((50 / 3) - 9) / 2)
+}
+
+int Game::getRowTerminalSize() {
+	return rowTerminal; 		
+}
+
+int Game::getColumnTerminalSize() {
+	return columnTerminal; 		
 }
 
 // Conditional When Game Over

@@ -17,7 +17,6 @@ class Game {
 		int WindowHorizontalPosition;
 
 		// Member Property to Windows Name
-		const char* NameTitle;
 		const char* ScoreTitle;
 		
 		// Member Property to Create Windows
@@ -39,6 +38,10 @@ class Game {
 		// Size of Window Map
 		int xMax;
 		int yMax;
+
+		// Size Current Terminal
+		int rowTerminal;
+		int columnTerminal;
 
 		// Characters
 		char Food= '*'; // Food Character
@@ -64,8 +67,6 @@ class Game {
 		int xDirection = 1;
 		int yDirection = 0;
 
-
-
 	public:	
 		// Exit or Play Again
 		bool end = false;
@@ -85,6 +86,8 @@ class Game {
 		bool render();
 		bool GameOver();
 		void Play();
+		int getRowTerminalSize();
+		int getColumnTerminalSize();
 		~Game();
 };
 

@@ -11,8 +11,21 @@ int main() {
 	const char scoreTitle[] = "[ Score ]";
 	Game* Map = new Game(HEIGHT, WIDTH, WINDOWVERTICALPOSITION, WINDOWHORIZONTALPOSITION, scoreTitle);
 
-	Map->Play();
+	// Exception Handling
+	try {
+		if(Map->getRowTerminalSize() < 20 || Map->getColumnTerminalSize() < 50) {
+			throw "Small Terminal";
+		}
+
+		Map->Play();
+	}
+
+	catch(const char* error) {
+		Map->~Game();
+		std::cout << "Error : " << error << "\nThis game can't run on small terminal. Please resize your terminal to play the game\n";	
+	}
 
 	delete Map;
+
 	return 0;
 }
