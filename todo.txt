@@ -3,7 +3,8 @@ To do :
 2. Print All at console (map, character, etc) when first run
 3. Showing Food Character in Map Window [done]
 4. Update Body Length [done]
-5. Snake died after hit it body
+5. Snake died after hit it body[done]
 6. Snake Auto Move 
 7. Fix Score Update [done]
 8. Fix food not spawn in  array body & head
+9. Add Menu Mechanism and Game Over Mechanism

@@ -17,12 +17,12 @@ class Game {
 		int WindowHorizontalPosition;
 
 		// Member Property to Windows Name
-		const char* NameTitle;
 		const char* ScoreTitle;
 		
 		// Member Property to Create Windows
 		WINDOW *Map;
 		WINDOW *Score;
+		WINDOW *GameOverPopUp;
 
 		// Member Property to Get Length Windows Name
 		size_t LengthName;
@@ -38,6 +38,10 @@ class Game {
 		// Size of Window Map
 		int xMax;
 		int yMax;
+
+		// Size Current Terminal
+		int rowTerminal;
+		int columnTerminal;
 
 		// Characters
 		char Food= '*'; // Food Character
@@ -63,9 +67,11 @@ class Game {
 		int xDirection = 1;
 		int yDirection = 0;
 
-
 	public:	
-		Game(int, int, int, int, const char*, const char*);
+		// Exit or Play Again
+		bool end = false;
+		bool playAgain = false;
+		Game(int, int, int, int, const char*);
 		void UpdateScore(WINDOW*, int);
 		void startPosition();
 		void UpdatePosition();
@@ -77,7 +83,11 @@ class Game {
 		void mvDown();
 		void mvRight();
 		void mvLeft();
-		void render();
+		bool render();
+		bool GameOver();
+		void Play();
+		int getRowTerminalSize();
+		int getColumnTerminalSize();
 		~Game();
 };
 
