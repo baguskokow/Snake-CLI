@@ -34,6 +34,7 @@ class Game {
 
 		// Default Point
 		int point = 0;
+		int highestScore;
 
 		// Size of Window Map
 		int xMax;
@@ -88,6 +89,8 @@ class Game {
 		void Play();
 		int getRowTerminalSize();
 		int getColumnTerminalSize();
+		void saveData();
+		int readData();
 		~Game();
 };
 

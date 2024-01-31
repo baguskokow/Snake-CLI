@@ -46,6 +46,7 @@ int Game::getColumnTerminalSize() {
 
 // Conditional When Game Over
 bool Game::GameOver() {
+	saveData();
 	werase(Map);
 	mvwprintw(Map, 9, 20, "GAME OVER");
 	box(Map, 0, 0);	
