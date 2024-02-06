@@ -13,4 +13,5 @@ void Game::UpdateScore(WINDOW* Score, int pointNow) {
 	
 	std::string pointString = std::to_string(point);
 	mvwprintw(Score, 2, 7.5, pointString.c_str());
+	wrefresh(Score);
 }

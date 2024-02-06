@@ -23,6 +23,7 @@ class Game {
 		WINDOW *Map;
 		WINDOW *Score;
 		WINDOW *GameOverPopUp;
+		WINDOW *MenuWindow;
 
 		// Member Property to Get Length Windows Name
 		size_t LengthName;
@@ -67,6 +68,9 @@ class Game {
 		// Default Direction
 		int xDirection = 1;
 		int yDirection = 0;
+		
+		// Continue Keypad
+		bool isContinue;
 
 	public:	
 		// Exit or Play Again
@@ -74,6 +78,11 @@ class Game {
 		bool playAgain = false;
 		Game(int, int, int, int, const char*);
 		void UpdateScore(WINDOW*, int);
+		void getUserInput();
+		bool render();
+		bool GameOver();
+		bool Play();
+		void Menu();
 		void startPosition();
 		void UpdatePosition();
 		void showCharacter(WINDOW*);
@@ -84,9 +93,6 @@ class Game {
 		void mvDown();
 		void mvRight();
 		void mvLeft();
-		bool render();
-		bool GameOver();
-		void Play();
 		int getRowTerminalSize();
 		int getColumnTerminalSize();
 		void saveData();

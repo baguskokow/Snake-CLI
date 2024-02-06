@@ -48,3 +48,34 @@ void Game::mvRight() {
 		xHead = 1;
 	}
 }
+
+void Game::getUserInput() {
+	keypad(Map, TRUE);
+	int choice = wgetch(Map);
+
+	switch(choice) {
+		case KEY_UP:
+			if(yDirection != 1) {
+				mvUp();
+			}
+			break;
+		case KEY_DOWN:
+			if(yDirection != -1) {
+				mvDown();
+			}
+			break;
+		case KEY_LEFT:
+			if(xDirection != 1) {
+				mvLeft();
+			}
+			break;
+		case KEY_RIGHT:
+			if(xDirection != -1) {
+				mvRight();
+			}
+			break;
+		default:
+			break;
+	}
+
+}
