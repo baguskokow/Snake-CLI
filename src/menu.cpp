@@ -1,3 +1,15 @@
+/* #########################################
+ *	
+ *	File: menu.cpp
+ *
+ *	Author : Bagus Koko Wibawanto
+ *
+ *	Version : 1.0
+ *
+ * ########################################
+ *
+ * */
+
 #include <iostream>
 #include <ctype.h>
 #include <string.h>
@@ -18,7 +30,6 @@ void Game::Menu() {
 
 
 	while(exit != true) {
-
 		for(int i = 0; i < 3; i++){
 			mvwprintw(MenuWindow, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
 		}

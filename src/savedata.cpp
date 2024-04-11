@@ -1,3 +1,15 @@
+/* #########################################
+ *	
+ *	File: savedata.cpp
+ *
+ *	Author : Bagus Koko Wibawanto
+ *
+ *	Version : 1.0
+ *
+ * ########################################
+ *
+ * */
+
 #include <iostream>
 #include <fstream>
 #include "../include/snake.hpp"

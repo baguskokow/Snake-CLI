@@ -1,3 +1,15 @@
+/* #########################################
+ *	
+ *	File: score.cpp
+ *
+ *	Author : Bagus Koko Wibawanto
+ *
+ *	Version : 1.0
+ *
+ * ########################################
+ *
+ * */
+
 #include <iostream>
 #include "../include/snake.hpp"
 

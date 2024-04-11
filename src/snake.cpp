@@ -1,7 +1,20 @@
+/* #########################################
+ *	
+ *	File: snake.cpp
+ *
+ *	Author : Bagus Koko Wibawanto
+ *
+ *	Version : 1.0
+ *
+ * ########################################
+ *
+ * */
+
 #include <iostream>
 #include <functional>
 #include <vector>
 #include "../include/snake.hpp"
+#include <unistd.h>
 
 Game::Game(int height, int width, int windowVerticalPosition, int windowHorizontalPosition, const char* scoreTitle) {
 	this->Height = height;
@@ -71,50 +84,74 @@ bool Game::GameOver() {
 	return exit;
 }
 
-// Render Game
 bool Game::render() {
-	//keypad(stdscr, TRUE);
-    box(Score, 0, 0);
-    curs_set(FALSE); 
-	bool gameOver = false;
+	curs_set(FALSE);
 	noecho();
-
+	werase(Map);
+	keypad(Map, TRUE);
+	nodelay(Map, TRUE);
 	startPosition();
+	int gameOver = false;
 
-	do {
-		mvwprintw(Score, 0, PositionScore, ScoreTitle);
-
-		UpdatePosition();
-		UpdateScore(Score, point);
-		werase(Map);
+	while(gameOver != true) {
 		box(Map, 0, 0);
+		box(Score, 0, 0);
+		mvwprintw(Score, 0, PositionScore, ScoreTitle);
+		controlSnakeHead();
+		
+		int choice = wgetch(Map);
+		
+		switch(choice) {
+			case KEY_UP:
+				if(yDirection == 1) {
+					continue;
+				}
+				mvUp();
+				break;
+			case KEY_DOWN:
+				if(yDirection == -1) {
+					continue;
+				}
+				mvDown();
+				break;
+			case KEY_RIGHT:
+				if(xDirection == -1) {
+					continue;
+				}
+				mvRight();
+				break;
+			case KEY_LEFT:
+				if(xDirection == 1) {
+					continue;
+				}
+				mvLeft();
+				break;
+		}
+		
+
+		werase(Map);
+		
+		SpawnFood();
+		
+		UpdateScore(Score, point);
+		UpdatePosition();
+		
 		showCharacter(Map);
 
-		// Showing Food in random position
-		// Fix ini, kerena dia munculin karakter + di layar map
-		if(yRandom == 0 && xRandom == 0) {
-			yRandom = yFoodRandom();
-			xRandom = xFoodRandom();
-			generateFood(Map, yRandom, xRandom);
-		} else {
-			generateFood(Map, yRandom, xRandom);
-		}
-
-		getUserInput();
-
-		// Checking if game over
 		for(int i = 1; i < bodyLength; i++) {
 			if(xHead == xBody[i] && yHead == yBody[i]) {
 				gameOver = true;
 			}
 		}
-
+		
+		directionControl();
+		
+		usleep(120000); // miliseconds
 		wrefresh(Map);
 		wrefresh(Score);
-
-	} while(gameOver != true);
+	}
 	
-	return gameOver;
+	return true;
 }
 
 // Looping Game

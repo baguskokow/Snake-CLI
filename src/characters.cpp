@@ -1,3 +1,15 @@
+/* #########################################
+ *	
+ *	File: characters.cpp
+ *
+ *	Author : Bagus Koko Wibawanto
+ *
+ *	Version : 1.0
+ *
+ * ########################################
+ *
+ * */
+
 #include <iostream>
 #include <algorithm>
 #include "../include/snake.hpp"
@@ -27,6 +39,18 @@ void Game::showCharacter(WINDOW* Map) {
 
 	for(int i = 1; i < bodyLength; i++) {
 		mvwaddch(Map, yBody[i], xBody[i], SnakeBody);
+	}
+}
+
+void Game::controlSnakeHead() {
+	if(xHead > 48) {
+		xHead = 1;
+	} else if(xHead < 1) {
+		xHead = 48;
+	} else if(yHead > 18) {
+		yHead = 1;
+	} else if(yHead < 1) {
+		yHead = 18;
 	}
 }
 
@@ -62,4 +86,14 @@ int Game::yFoodRandom() {
 
 void Game::generateFood(WINDOW* Map, int yFood, int xFood) {
 	mvwaddch(Map, yFood, xFood, Food);
+}
+
+void Game::SpawnFood() {
+	if(yRandom == 0 && xRandom == 0) {
+		yRandom = yFoodRandom();
+		xRandom = xFoodRandom();
+		generateFood(Map, yRandom, xRandom);
+	} else {
+		generateFood(Map, yRandom, xRandom);
+	}
 }
