@@ -1,7 +1,20 @@
+/* #########################################
+ *	
+ *	File: snake.cpp
+ *
+ *	Author : Bagus Koko Wibawanto
+ *
+ *	Version : 1.0
+ *
+ * ########################################
+ *
+ * */
+
 #include <iostream>
 #include <functional>
 #include <vector>
 #include "../include/snake.hpp"
+#include <unistd.h>
 
 Game::Game(int height, int width, int windowVerticalPosition, int windowHorizontalPosition, const char* scoreTitle) {
 	this->Height = height;
@@ -27,6 +40,9 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	// Game Over Pop Up Window
 	this->GameOverPopUp = newwin(10, 20, 4, 5);
 
+	// Menu Window
+	this->MenuWindow = newwin(20, 50, 0, 0);
+
 	// Get Terminal Size
 	getmaxyx(stdscr, rowTerminal, columnTerminal);
 
@@ -46,101 +62,81 @@ int Game::getColumnTerminalSize() {
 
 // Conditional When Game Over
 bool Game::GameOver() {
+	//saveData();
+	bool exit = false;
 	werase(Map);
-	mvwprintw(Map, 9, 20, "GAME OVER");
 	box(Map, 0, 0);	
-	wrefresh(Map);
-	refresh();
-	int choice = getch();
+	noecho();
+    curs_set(FALSE); 
+	
+	mvwprintw(Map, 9, 20, "GAME OVER");
+	mvwprintw(Map, 18, 2, "Play Again (p)");
+	mvwprintw(Map, 18, 30, "Return to Menu (q)");
 	this->xHead = 5;
 	this->yHead = 4;
 	this->point = 0;
 	this->bodyLength = 4;
-	keypad(stdscr, TRUE);
-	
-	bool end = false;
 
-	switch(choice) {
-		case 'q':
-			end = true;
-			break;
-		case ' ':
-			end = false;
-			break;
-		default:
-			end = false;
-	}
-	return end;
+	refresh();
+	wrefresh(Map);
+	wrefresh(Score);
+	wgetch(Map);
+	return exit;
 }
 
-// Render Game
 bool Game::render() {
-	keypad(stdscr, TRUE);
-    box(Score, 0, 0);
-    curs_set(FALSE); 
-	bool gameOver = false;
+	curs_set(FALSE);
 	noecho();
-
+	werase(Map);
+	keypad(Map, TRUE);
+	nodelay(Map, TRUE);
 	startPosition();
-	
-	while(!gameOver) {
+	int gameOver = false;
 
-		int choice = getch();
-
+	while(gameOver != true) {
+		box(Map, 0, 0);
+		box(Score, 0, 0);
+		mvwprintw(Score, 0, PositionScore, ScoreTitle);
+		controlSnakeHead();
+		
+		int choice = wgetch(Map);
+		
 		switch(choice) {
 			case KEY_UP:
-				if(yDirection != 1) {
-					mvUp();
-					break;
-				} else {
+				if(yDirection == 1) {
 					continue;
 				}
+				mvUp();
+				break;
 			case KEY_DOWN:
-				if(yDirection != -1) {
-					mvDown();
-					break;
-				} else {
+				if(yDirection == -1) {
 					continue;
 				}
-			case KEY_LEFT:
-				if(xDirection != 1) {
-					mvLeft();
-					break;
-				} else {
-					continue;
-				}
+				mvDown();
+				break;
 			case KEY_RIGHT:
-				if(xDirection != -1) {
-					mvRight();
-					break;
-				} else {
+				if(xDirection == -1) {
 					continue;
 				}
-			case 'q':
-				gameOver = true;
+				mvRight();
 				break;
-			case ' ':
+			case KEY_LEFT:
+				if(xDirection == 1) {
+					continue;
+				}
+				mvLeft();
 				break;
-			default:
-				continue;
 		}
-
-		UpdatePosition();
-
-		mvwprintw(Score, 0, PositionScore, ScoreTitle);
+		
 
 		werase(Map);
-		box(Map, 0, 0);
-
-		showCharacter(Map);
+		
+		SpawnFood();
+		
 		UpdateScore(Score, point);
-		if(yRandom == 0 && xRandom == 0) {
-			yRandom = yFoodRandom();
-			xRandom = xFoodRandom();
-			generateFood(Map, yRandom, xRandom);
-		} else {
-			generateFood(Map, yRandom, xRandom);
-		}
+		UpdatePosition();
+		
+		showCharacter(Map);
 
 		for(int i = 1; i < bodyLength; i++) {
 			if(xHead == xBody[i] && yHead == yBody[i]) {
@@ -148,26 +144,28 @@ bool Game::render() {
 			}
 		}
 		
+		directionControl();
+		
+		usleep(120000); // miliseconds
 		wrefresh(Map);
 		wrefresh(Score);
 	}
-	return gameOver;
+	
+	return true;
 }
 
 // Looping Game
-void Game::Play() {
+bool Game::Play() {
 	bool exit = false;
 	while(exit != true) {
 		if(render() == true) {
-			if(GameOver() == false) {
-				exit = false;
-			} else {
+			if(GameOver() == true) {
+				GameOver();
 				exit = true;
 			}
-		} else {
-			render();
 		}
 	}
+	return exit;
 }
 
 Game::~Game() {

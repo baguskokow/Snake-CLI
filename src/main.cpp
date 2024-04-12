@@ -1,3 +1,15 @@
+/* #########################################
+ *	
+ *	File: main.cpp
+ *
+ *	Author : Bagus Koko Wibawanto
+ *
+ *	Version : 1.0
+ *
+ * ########################################
+ *
+ * */
+
 #include <iostream>
 #include "../include/snake.hpp"
 
@@ -17,12 +29,12 @@ int main() {
 			throw "Small Terminal";
 		}
 
-		Map->Play();
+		Map->Menu();
 	}
 
 	catch(const char* error) {
 		Map->~Game();
-		std::cout << "Error : " << error << "\nThis game can't run on small terminal. Please resize your terminal to play the game\n";	
+		std::cout << "Error : " << error << "\nThis game can't run on small terminal. Please resize your terminal to play the game!\n";	
 	}
 
 	delete Map;

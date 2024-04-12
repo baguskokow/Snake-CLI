@@ -4,8 +4,8 @@ LDLIBS := ncurses
 OBJECT := build/objects
 BIN := build/bin
 
-all: build main.o snake.o characters.o control.o score.o
-	$(CXX) $(CXX_FLAGS) $(OBJECT)/main.o $(OBJECT)/snake.o $(OBJECT)/characters.o $(OBJECT)/control.o $(OBJECT)/score.o -L include/ncurses -l$(LDLIBS) -o $(BIN)/snake
+all: build main.o snake.o characters.o control.o score.o savedata.o menu.o
+	$(CXX) $(CXX_FLAGS) $(OBJECT)/main.o $(OBJECT)/snake.o $(OBJECT)/characters.o $(OBJECT)/control.o $(OBJECT)/score.o $(OBJECT)/savedata.o $(OBJECT)/menu.o -L include/ncurses -l$(LDLIBS) -o $(BIN)/snake
 
 build:
 	if [ ! -d build/objects ] && [ ! -d build/bin ]; then \
@@ -27,6 +27,16 @@ control.o:
 
 score.o:
 	$(CXX) -c src/score.cpp $(CXX_FLAGS) -o $(OBJECT)/score.o
+
+savedata.o:
+	$(CXX) -c src/savedata.cpp $(CXX_FLAGS) -o $(OBJECT)/savedata.o
+
+menu.o:
+	$(CXX) -c src/menu.cpp $(CXX_FLAGS) -o $(OBJECT)/menu.o
+
+install:
+	@sudo cp $(BIN)/snake /usr/local/bin/snake
+	@mkdir -p ${HOME}/.snake-cli/save
 
 clean:
 	@echo "Clearing..."

@@ -1,3 +1,15 @@
+/* #########################################
+ *	
+ *	File: score.cpp
+ *
+ *	Author : Bagus Koko Wibawanto
+ *
+ *	Version : 1.0
+ *
+ * ########################################
+ *
+ * */
+
 #include <iostream>
 #include "../include/snake.hpp"
 
@@ -13,4 +25,5 @@ void Game::UpdateScore(WINDOW* Score, int pointNow) {
 	
 	std::string pointString = std::to_string(point);
 	mvwprintw(Score, 2, 7.5, pointString.c_str());
+	wrefresh(Score);
 }
