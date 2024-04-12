@@ -94,6 +94,16 @@ void Game::SpawnFood() {
 		xRandom = xFoodRandom();
 		generateFood(Map, yRandom, xRandom);
 	} else {
+		// Ensure the food location is not same as the snake character
+		for(int i = bodyLength; i > 0; --i) {
+			while(yRandom == yBody[i] && xRandom == xBody[i]) {
+				if(yRandom == yBody[i]) {
+					yRandom = yFoodRandom();
+				} else if(xRandom == xBody[i]){
+					xRandom = xFoodRandom();
+				}
+			}
+		}
 		generateFood(Map, yRandom, xRandom);
 	}
 }

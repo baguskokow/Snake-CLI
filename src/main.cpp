@@ -29,7 +29,8 @@ int main() {
 			throw "Small Terminal";
 		}
 
-		Map->Menu();
+		//Map->Menu();
+		Map->render();
 	}
 
 	catch(const char* error) {

@@ -1,3 +1,16 @@
+/* #########################################
+ *	
+ *	File: snake.hpp
+ *
+ *	Author : Bagus Koko Wibawanto
+ *
+ *	Version : 1.0
+ *
+ * ########################################
+ *
+ * */
+
+
 #include <unistd.h>
 #include <string.h>
 #include <vector>
@@ -78,7 +91,6 @@ class Game {
 		bool playAgain = false;
 		Game(int, int, int, int, const char*);
 		void UpdateScore(WINDOW*, int);
-		void getUserInput();
 		bool render();
 		bool GameOver();
 		bool Play();
@@ -86,13 +98,16 @@ class Game {
 		void startPosition();
 		void UpdatePosition();
 		void showCharacter(WINDOW*);
+		void controlSnakeHead();
 		void generateFood(WINDOW*, int, int);
 		int xFoodRandom();
 		int yFoodRandom();
+		void SpawnFood();
 		void mvUp();
 		void mvDown();
 		void mvRight();
 		void mvLeft();
+		void directionControl();
 		int getRowTerminalSize();
 		int getColumnTerminalSize();
 		void saveData();
