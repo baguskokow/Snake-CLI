@@ -37,6 +37,8 @@ class Game {
 		WINDOW *Score;
 		WINDOW *GameOverPopUp;
 		WINDOW *MenuWindow;
+		WINDOW *BestScoreWindow;
+		WINDOW *GameOverWindow;
 
 		// Member Property to Get Length Windows Name
 		size_t LengthName;
@@ -48,7 +50,9 @@ class Game {
 
 		// Default Point
 		int point = 0;
+		std::string lastPoint = std::to_string(point);
 		int highestScore;
+		std::string highScoreString;
 
 		// Size of Window Map
 		int xMax;
@@ -85,6 +89,7 @@ class Game {
 		// Continue Keypad
 		bool isContinue;
 
+
 	public:	
 		// Exit or Play Again
 		bool end = false;
@@ -93,6 +98,7 @@ class Game {
 		void UpdateScore(WINDOW*, int);
 		bool render();
 		bool GameOver();
+		void ShowPopUpGameOver();
 		bool Play();
 		void Menu();
 		void startPosition();
@@ -111,7 +117,8 @@ class Game {
 		int getRowTerminalSize();
 		int getColumnTerminalSize();
 		void saveData();
-		int readData();
+		void readData();
+		void ShowBestScore();
 		~Game();
 };
 

@@ -26,16 +26,15 @@ void Game::saveData() {
 }
 
 // Read
-int Game::readData() {
+void Game::readData() {
 	std::ifstream bestScore("savedata/score.txt");
-	std::string highScore;
 
 	if(bestScore.is_open()) {
-		getline(bestScore, highScore);
+		getline(bestScore, highScoreString);
 		bestScore.close();
 	} else {
-		highScore = '0';
+		highScoreString = '0';
 	}
 	
-	return highestScore = std::stoi(highScore);
+	highestScore = std::stoi(highScoreString);
 }

@@ -38,10 +38,16 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	// 50 Position Horizontal after Width and + 5 for space
 	
 	// Game Over Pop Up Window
-	this->GameOverPopUp = newwin(10, 20, 4, 5);
+	this->GameOverPopUp = newwin(9, 25, 6, 12);
 
 	// Menu Window
 	this->MenuWindow = newwin(20, 50, 0, 0);
+	
+	// Game Over Window
+	this->GameOverWindow = newwin(20, 50, 0, 0);
+	
+	// Best Score Window
+	this->BestScoreWindow = newwin(8, 25, 6, 12);
 
 	// Get Terminal Size
 	getmaxyx(stdscr, rowTerminal, columnTerminal);
@@ -61,33 +67,34 @@ int Game::getColumnTerminalSize() {
 }
 
 // Conditional When Game Over
-bool Game::GameOver() {
-	//saveData();
-	bool exit = false;
-	werase(Map);
-	box(Map, 0, 0);	
-	noecho();
-    curs_set(FALSE); 
-	
-	mvwprintw(Map, 9, 20, "GAME OVER");
-	mvwprintw(Map, 18, 2, "Play Again (p)");
-	mvwprintw(Map, 18, 30, "Return to Menu (q)");
-	this->xHead = 5;
-	this->yHead = 4;
-	this->point = 0;
-	this->bodyLength = 4;
-
-	refresh();
-	wrefresh(Map);
-	wrefresh(Score);
-	wgetch(Map);
-	return exit;
-}
+//bool Game::GameOver() {
+//	//saveData();
+//	bool exit = false;
+//	werase(Map);
+//	box(Map, 0, 0);	
+//	noecho();
+//    curs_set(FALSE); 
+//	
+//	mvwprintw(Map, 9, 20, "GAME OVER");
+//	mvwprintw(Map, 18, 2, "Play Again (p)");
+//	mvwprintw(Map, 18, 30, "Return to Menu (q)");
+//	this->xHead = 5;
+//	this->yHead = 4;
+//	this->point = 0;
+//	this->bodyLength = 4;
+//
+//	refresh();
+//	wrefresh(Map);
+//	wrefresh(Score);
+//	wgetch(Map);
+//	return exit;
+//}
 
 bool Game::render() {
 	curs_set(FALSE);
 	noecho();
 	werase(Map);
+	werase(Score);
 	keypad(Map, TRUE);
 	nodelay(Map, TRUE);
 	startPosition();
@@ -150,6 +157,21 @@ bool Game::render() {
 		wrefresh(Map);
 		wrefresh(Score);
 	}
+
+	// Read Data & When current point bigger than highestScore, it will be replaced.
+	readData();
+	if(point > highestScore) {
+		saveData();
+	}
+	
+	werase(Map);
+	box(Map, 0, 0);
+	wrefresh(Map);
+	ShowPopUpGameOver();
+	
+	point = 0;
+	bodyLength = 4;
+	startPosition();
 	
 	return true;
 }
