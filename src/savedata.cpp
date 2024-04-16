@@ -15,12 +15,12 @@
 // Save Score
 void Game::saveData() {
 	//std::string homeDirectory = getenv("HOME");
-	std::ofstream bestScore;
+	std::ofstream highScore;
 
-	bestScore.open("savedata/score.txt", std::ios::out);
+	highScore.open("savedata/score.txt", std::ios::out);
 
-	bestScore << point;
-	bestScore.close();
+	highScore << point;
+	highScore.close();
 }
 
 // Read
@@ -35,4 +35,15 @@ void Game::readData() {
 	}
 	
 	highestScore = std::stoi(highScoreString);
+}
+
+// Reset Data
+void Game::resetData() {
+	this->highestScore = 0;
+	std::ofstream highScore;
+
+	highScore.open("savedata/score.txt", std::ios::out);
+
+	highScore << highestScore;
+	highScore.close();
 }

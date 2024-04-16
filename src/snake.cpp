@@ -44,8 +44,14 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	// Game Over Window
 	this->GameOverWindow = newwin(20, 50, 0, 0);
 	
-	// Best Score Window
+	// High Score Window
 	this->BestScoreWindow = newwin(8, 25, 6, 12);
+
+	// Confirm Reset High Score
+	this->ConfirmWindow = newwin(10, 41, 5, 5.5);
+	
+	// Success Pop Up Window
+	this->SuccessWindow = newwin(7, 25, 6, 12);
 
 	// Get Terminal Size
 	getmaxyx(stdscr, rowTerminal, columnTerminal);

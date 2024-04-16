@@ -39,14 +39,19 @@ void Game::ShowBestScore() {
 
 	while(exit != true) {
 		mvwprintw(BestScoreWindow, 0, 0, "[ q ]");
-		mvwprintw(BestScoreWindow, 2, 7, "Best Score");
+		mvwprintw(BestScoreWindow, 0, 6, "[ r ]");
+		mvwprintw(BestScoreWindow, 2, 7, "High Score");
 		mvwprintw(BestScoreWindow, 4, 11, highScoreString.c_str());
+		refresh();
 
 		int choice = wgetch(BestScoreWindow);
 
 		switch(choice) {
 			case 'q':
 				exit = true;
+				break;
+			case 'r':
+				showConfirmPopUp();
 				break;
 			default:
 				break;

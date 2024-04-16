@@ -18,7 +18,7 @@ void Game::Menu() {
 	refresh();
 	curs_set(FALSE);
 	noecho();
-	std::string listMenu[3] = {" Play ", " Best Score ", " Quit "};
+	std::string listMenu[3] = {" Play ", " High Score ", " Quit "};
 	box(MenuWindow, 0, 0);
 	wrefresh(MenuWindow);
 	keypad(MenuWindow, TRUE);

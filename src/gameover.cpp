@@ -55,9 +55,7 @@ bool Game::GameOver() {
                                 break;
                         case 10:
                                 if(highlight == 0) {
-                                        point = 0;
-                                        bodyLength = 4;
-                                        startPosition();
+                                        resetSnake();
                                         render();
                                         break;
                                 } else if(highlight == 1) {
