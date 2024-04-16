@@ -4,8 +4,6 @@
  *
  *	Author : Bagus Koko Wibawanto
  *
- *	Version : 1.0
- *
  * ########################################
  *
  * */
@@ -56,40 +54,23 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	this->LengthScore = strlen(scoreTitle);
 
 	this->PositionScore = ((Width / 3) - LengthScore) / 2; // Ex : ((50 / 3) - 9) / 2)
+	
+	// X & Y Snake Head
+	this->xHead = xHeadRandom();
+	this->yHead = yHeadRandom();
 }
 
+// Get Row Size of Terminal
 int Game::getRowTerminalSize() {
 	return rowTerminal; 		
 }
 
+// Get Column Size of Terminal
 int Game::getColumnTerminalSize() {
 	return columnTerminal; 		
 }
 
-// Conditional When Game Over
-//bool Game::GameOver() {
-//	//saveData();
-//	bool exit = false;
-//	werase(Map);
-//	box(Map, 0, 0);	
-//	noecho();
-//    curs_set(FALSE); 
-//	
-//	mvwprintw(Map, 9, 20, "GAME OVER");
-//	mvwprintw(Map, 18, 2, "Play Again (p)");
-//	mvwprintw(Map, 18, 30, "Return to Menu (q)");
-//	this->xHead = 5;
-//	this->yHead = 4;
-//	this->point = 0;
-//	this->bodyLength = 4;
-//
-//	refresh();
-//	wrefresh(Map);
-//	wrefresh(Score);
-//	wgetch(Map);
-//	return exit;
-//}
-
+// Render the Game
 bool Game::render() {
 	curs_set(FALSE);
 	noecho();
@@ -169,25 +150,9 @@ bool Game::render() {
 	wrefresh(Map);
 	ShowPopUpGameOver();
 	
-	point = 0;
-	bodyLength = 4;
-	startPosition();
+	resetSnake();
 	
 	return true;
-}
-
-// Looping Game
-bool Game::Play() {
-	bool exit = false;
-	while(exit != true) {
-		if(render() == true) {
-			if(GameOver() == true) {
-				GameOver();
-				exit = true;
-			}
-		}
-	}
-	return exit;
 }
 
 Game::~Game() {

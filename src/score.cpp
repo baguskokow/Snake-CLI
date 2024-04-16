@@ -4,8 +4,6 @@
  *
  *	Author : Bagus Koko Wibawanto
  *
- *	Version : 1.0
- *
  * ########################################
  *
  * */
@@ -28,6 +26,7 @@ void Game::UpdateScore(WINDOW* Score, int pointNow) {
 	wrefresh(Score);
 }
 
+// Show Best Score
 void Game::ShowBestScore() {
 	refresh();
 	curs_set(FALSE);

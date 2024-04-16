@@ -4,12 +4,9 @@
  *
  *	Author : Bagus Koko Wibawanto
  *
- *	Version : 1.0
- *
  * ########################################
  *
  * */
-
 
 #include <unistd.h>
 #include <string.h>
@@ -71,8 +68,8 @@ class Game {
 		int bodyLength = 4; 
 
 		// Default Position xHead & yHead
-		int xHead = 5; // Position of X Head
-		int yHead = 4; // Position of Y Head
+		int xHead; // Position of X Head
+		int yHead; // Position of Y Head
 					
 		//Random Food Position
 		int yRandom;
@@ -91,9 +88,6 @@ class Game {
 
 
 	public:	
-		// Exit or Play Again
-		bool end = false;
-		bool playAgain = false;
 		Game(int, int, int, int, const char*);
 		void UpdateScore(WINDOW*, int);
 		bool render();
@@ -103,6 +97,8 @@ class Game {
 		void Menu();
 		void startPosition();
 		void UpdatePosition();
+		int xHeadRandom();
+		int yHeadRandom();
 		void showCharacter(WINDOW*);
 		void controlSnakeHead();
 		void generateFood(WINDOW*, int, int);
@@ -119,6 +115,8 @@ class Game {
 		void saveData();
 		void readData();
 		void ShowBestScore();
+		void removeScoreWindow();
+		void resetSnake();
 		~Game();
 };
 

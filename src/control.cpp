@@ -4,8 +4,6 @@
  *
  *	Author : Bagus Koko Wibawanto
  *
- *	Version : 1.0
- *
  * ########################################
  *
  * */
@@ -37,6 +35,7 @@ void Game::mvRight() {
 	yDirection = 0;
 }
 
+// Direction Control
 void Game::directionControl() {
 	if(yDirection == -1 && xDirection == 0) {
 		yHead--;
