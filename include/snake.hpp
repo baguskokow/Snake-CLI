@@ -36,6 +36,8 @@ class Game {
 		WINDOW *MenuWindow;
 		WINDOW *BestScoreWindow;
 		WINDOW *GameOverWindow;
+		WINDOW *ConfirmWindow;
+		WINDOW *SuccessWindow;
 
 		// Member Property to Get Length Windows Name
 		size_t LengthName;
@@ -114,9 +116,14 @@ class Game {
 		int getColumnTerminalSize();
 		void saveData();
 		void readData();
+		void resetData();
 		void ShowBestScore();
 		void removeScoreWindow();
+		void removeConfirmWindow();
+		void removeSuccessWindow();
 		void resetSnake();
+		void showConfirmPopUp();
+		bool showSuccessPopUp();
 		~Game();
 };
 

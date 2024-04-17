@@ -86,6 +86,7 @@ bool Game::render() {
 	nodelay(Map, TRUE);
 	startPosition();
 	int gameOver = false;
+	bool paused = false;
 
 	while(gameOver != true) {
 		box(Map, 0, 0);
@@ -120,25 +121,31 @@ bool Game::render() {
 				}
 				mvLeft();
 				break;
+			case ' ': // Pause Game
+				if(paused == false) {
+					paused = true;
+					mvwprintw(Map, 10, 20, "PAUSED");
+				} else {
+					paused = false;
+				}
 		}
 		
-
-		werase(Map);
+		if(paused != true) {
+			UpdatePosition();
+			werase(Map);
+			showCharacter(Map);
+			directionControl();
+		}
 		
 		SpawnFood();
 		
 		UpdateScore(Score, point);
-		UpdatePosition();
-		
-		showCharacter(Map);
 
 		for(int i = 1; i < bodyLength; i++) {
 			if(xHead == xBody[i] && yHead == yBody[i]) {
 				gameOver = true;
 			}
 		}
-		
-		directionControl();
 		
 		usleep(120000); // miliseconds
 		wrefresh(Map);
