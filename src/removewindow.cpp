@@ -29,3 +29,9 @@ void Game::removeSuccessWindow() {
 	wrefresh(SuccessWindow);
 	box(ConfirmWindow, 0, 0);
 }
+
+void Game::removeHighScoreWindow() {
+	werase(BestScoreWindow);
+	wrefresh(BestScoreWindow);
+	box(BestScoreWindow, 0, 0);
+}

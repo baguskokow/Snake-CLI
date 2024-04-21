@@ -12,7 +12,7 @@
 #include "../include/snake.hpp"
 
 // Pop Up When Game Over
-void Game::ShowPopUpGameOver() {
+bool Game::ShowPopUpGameOver() {
         curs_set(FALSE);
         box(GameOverPopUp, 0, 0);
         bool exit = false;
@@ -28,6 +28,7 @@ void Game::ShowPopUpGameOver() {
                         case 'q':
                                 exit = true;
                                 removeScoreWindow();
+                                GameOver();
                                 break;
                         default:
                                 break;
@@ -35,7 +36,8 @@ void Game::ShowPopUpGameOver() {
 
                 box(GameOverPopUp, 0, 0);
         }
-        GameOver();
+        
+        return true;
 }
 
 // Show Confirm Pop Up
@@ -87,9 +89,11 @@ void Game::showConfirmPopUp() {
                         case 10:
                                 if(highlight == 0) {
                                         resetData();
+                                        readData();
                                         if(highestScore == 0) {
                                                 showSuccessPopUp();
                                         }
+                                        exit = true;
                                 } else if(highlight == 1) {
                                         exit = true;
                                         removeConfirmWindow();
@@ -97,7 +101,6 @@ void Game::showConfirmPopUp() {
                         default:
                                 break;
                 }
-
         }
 }
 
@@ -119,12 +122,11 @@ bool Game::showSuccessPopUp() {
                         case 'q':
                                 exit = true;
                                 removeSuccessWindow();
+                                removeHighScoreWindow(); 
                                 break;
                         default:
                                 break;
                 }
-
-                box(SuccessWindow, 0, 0);
         }
         return true;
 }

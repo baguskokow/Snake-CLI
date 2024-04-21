@@ -21,7 +21,7 @@ int Game::xHeadRandom() {
 	int xRandom = std::rand() % xMax;
 	
 	if(xRandom < 5) {
-		return xRandom + 2;
+		return xRandom + 1;
 	} else if(xRandom > 42) {
 		return xRandom - 5;
 	} else {
@@ -37,9 +37,9 @@ int Game::yHeadRandom() {
 	int yRandom = std::rand() % yMax;
 	
 	if(yRandom < 5) {
-		return yRandom + 2;
+		return yRandom + 1;
 	} else if(yRandom > 12) {
-		return yRandom - 5;
+		return yRandom - 4;
 	} else {
 		return yRandom;
 	}
@@ -74,10 +74,17 @@ void Game::showCharacter(WINDOW* Map) {
 
 // Reset Snake
 void Game::resetSnake() {
+//	for(int i = 1; i < bodyLength; i++) {
+//		xBody[i] = 0;
+//		yBody[i] = 0;
+//	}
 	point = 0;
 	bodyLength = 4;
-	xHead = xHeadRandom(); 
-	yHead = yHeadRandom(); 
+//	xHead = xHeadRandom(); 
+//	yHead = xHead - 1; 
+	//yHead = yHeadRandom(); 
+	xHead = 5;
+	yHead = 4;
 	startPosition();
 }
 

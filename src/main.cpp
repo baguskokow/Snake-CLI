@@ -30,8 +30,8 @@ int main() {
 		Map->Menu();
 		//Map->showSuccessPopUp();
 		//Map->showConfirmPopUp();
-	//	Map->render();
-	//	Map->GameOver();
+		//Map->render();
+//		Map->GameOver();
 	//	Map->ShowPopUpGameOver();
 	}
 

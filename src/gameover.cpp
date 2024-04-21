@@ -55,15 +55,16 @@ bool Game::GameOver() {
                                 break;
                         case 10:
                                 if(highlight == 0) {
-                                        resetSnake();
-                                        render();
+                                        exit = true;
+                                        playAgain = true;
                                         break;
                                 } else if(highlight == 1) {
                                         exit = true;
+                                        playAgain = false;
+                                        break;
                                 }
                         default:
                                 break;
                 }
-
         }
 }
