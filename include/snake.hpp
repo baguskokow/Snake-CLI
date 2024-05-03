@@ -51,7 +51,7 @@ class Game {
 		int point = 0;
 		std::string lastPoint = std::to_string(point);
 		int highestScore;
-		std::string highScoreString;
+		std::string highScoreString = std::to_string(highestScore);
 
 		// Size of Window Map
 		int xMax;
@@ -86,7 +86,7 @@ class Game {
 		int yDirection = 0;
 		
 		// Continue Keypad
-		bool isContinue;
+		bool playAgain = true;
 
 
 	public:	
@@ -94,7 +94,7 @@ class Game {
 		void UpdateScore(WINDOW*, int);
 		bool render();
 		bool GameOver();
-		void ShowPopUpGameOver();
+		bool ShowPopUpGameOver();
 		bool Play();
 		void Menu();
 		void startPosition();
@@ -121,6 +121,7 @@ class Game {
 		void removeScoreWindow();
 		void removeConfirmWindow();
 		void removeSuccessWindow();
+		void removeHighScoreWindow();
 		void resetSnake();
 		void showConfirmPopUp();
 		bool showSuccessPopUp();

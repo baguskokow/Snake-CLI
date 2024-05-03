@@ -21,7 +21,7 @@ int Game::xHeadRandom() {
 	int xRandom = std::rand() % xMax;
 	
 	if(xRandom < 5) {
-		return xRandom + 2;
+		return xRandom + 1;
 	} else if(xRandom > 42) {
 		return xRandom - 5;
 	} else {
@@ -37,9 +37,9 @@ int Game::yHeadRandom() {
 	int yRandom = std::rand() % yMax;
 	
 	if(yRandom < 5) {
-		return yRandom + 2;
+		return yRandom + 1;
 	} else if(yRandom > 12) {
-		return yRandom - 5;
+		return yRandom - 4;
 	} else {
 		return yRandom;
 	}
@@ -77,8 +77,13 @@ void Game::resetSnake() {
 	point = 0;
 	bodyLength = 4;
 	xHead = xHeadRandom(); 
-	yHead = yHeadRandom(); 
-	startPosition();
+	yHead = xHead - 1; 
+
+	// Start Position
+	for(int i = 0; i < bodyLength; ++i) {
+		xBody[i] = xHead - i - 1;
+		yBody[i] = yHead;
+	}
 }
 
 // Control the Snake Head when it exits the map

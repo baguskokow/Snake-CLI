@@ -85,10 +85,11 @@ bool Game::render() {
 	keypad(Map, TRUE);
 	nodelay(Map, TRUE);
 	startPosition();
-	int gameOver = false;
+	bool gameOver = false;
 	bool paused = false;
+	bool exit = false;
 
-	while(gameOver != true) {
+	while(exit != true) {
 		box(Map, 0, 0);
 		box(Score, 0, 0);
 		mvwprintw(Score, 0, PositionScore, ScoreTitle);
@@ -129,7 +130,8 @@ bool Game::render() {
 					paused = false;
 				}
 		}
-		
+	
+		// Paused Game
 		if(paused != true) {
 			UpdatePosition();
 			werase(Map);
@@ -140,32 +142,37 @@ bool Game::render() {
 		SpawnFood();
 		
 		UpdateScore(Score, point);
-
-		for(int i = 1; i < bodyLength; i++) {
-			if(xHead == xBody[i] && yHead == yBody[i]) {
-				gameOver = true;
-			}
-		}
 		
 		usleep(120000); // miliseconds
 		wrefresh(Map);
 		wrefresh(Score);
-	}
+		
+		for(int i = 0; i < bodyLength; ++i) {
+			if(xHead == xBody[i] && yHead == yBody[i]) {
+				gameOver = true;
+			}
+		}
 
-	// Read Data & When current point bigger than highestScore, it will be replaced.
-	readData();
-	if(point > highestScore) {
-		saveData();
+		if(gameOver == true) {
+				werase(Map);
+				box(Map, 0, 0);
+				wrefresh(Map);
+				ShowPopUpGameOver();
+				readData();
+				if(point > highestScore) {
+					saveData();
+				}
+
+				if(playAgain == false) {
+					gameOver = false;
+					exit = true;
+				} else {
+					gameOver = false;	
+					resetSnake();
+				}
+		}
 	}
-	
-	werase(Map);
-	box(Map, 0, 0);
-	wrefresh(Map);
-	ShowPopUpGameOver();
-	
-	resetSnake();
-	
-	return true;
+	return 0;
 }
 
 Game::~Game() {
