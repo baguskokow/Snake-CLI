@@ -4,8 +4,6 @@
  *
  *	Author : Bagus Koko Wibawanto
  *
- *	Version : 1.0
- *
  * ########################################
  *
  * */
@@ -38,10 +36,22 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	// 50 Position Horizontal after Width and + 5 for space
 	
 	// Game Over Pop Up Window
-	this->GameOverPopUp = newwin(10, 20, 4, 5);
+	this->GameOverPopUp = newwin(9, 25, 6, 12);
 
 	// Menu Window
 	this->MenuWindow = newwin(20, 50, 0, 0);
+	
+	// Game Over Window
+	this->GameOverWindow = newwin(20, 50, 0, 0);
+	
+	// High Score Window
+	this->BestScoreWindow = newwin(8, 25, 6, 12);
+
+	// Confirm Reset High Score
+	this->ConfirmWindow = newwin(10, 41, 5, 5.5);
+	
+	// Success Pop Up Window
+	this->SuccessWindow = newwin(7, 25, 6, 12);
 
 	// Get Terminal Size
 	getmaxyx(stdscr, rowTerminal, columnTerminal);
@@ -50,50 +60,36 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	this->LengthScore = strlen(scoreTitle);
 
 	this->PositionScore = ((Width / 3) - LengthScore) / 2; // Ex : ((50 / 3) - 9) / 2)
+	
+	// X & Y Snake Head
+	this->xHead = xHeadRandom();
+	this->yHead = yHeadRandom();
 }
 
+// Get Row Size of Terminal
 int Game::getRowTerminalSize() {
 	return rowTerminal; 		
 }
 
+// Get Column Size of Terminal
 int Game::getColumnTerminalSize() {
 	return columnTerminal; 		
 }
 
-// Conditional When Game Over
-bool Game::GameOver() {
-	//saveData();
-	bool exit = false;
-	werase(Map);
-	box(Map, 0, 0);	
-	noecho();
-    curs_set(FALSE); 
-	
-	mvwprintw(Map, 9, 20, "GAME OVER");
-	mvwprintw(Map, 18, 2, "Play Again (p)");
-	mvwprintw(Map, 18, 30, "Return to Menu (q)");
-	this->xHead = 5;
-	this->yHead = 4;
-	this->point = 0;
-	this->bodyLength = 4;
-
-	refresh();
-	wrefresh(Map);
-	wrefresh(Score);
-	wgetch(Map);
-	return exit;
-}
-
+// Render the Game
 bool Game::render() {
 	curs_set(FALSE);
 	noecho();
 	werase(Map);
+	werase(Score);
 	keypad(Map, TRUE);
 	nodelay(Map, TRUE);
 	startPosition();
-	int gameOver = false;
+	bool gameOver = false;
+	bool paused = false;
+	bool exit = false;
 
-	while(gameOver != true) {
+	while(exit != true) {
 		box(Map, 0, 0);
 		box(Score, 0, 0);
 		mvwprintw(Score, 0, PositionScore, ScoreTitle);
@@ -126,46 +122,57 @@ bool Game::render() {
 				}
 				mvLeft();
 				break;
+			case ' ': // Pause Game
+				if(paused == false) {
+					paused = true;
+					mvwprintw(Map, 10, 20, "PAUSED");
+				} else {
+					paused = false;
+				}
 		}
-		
-
-		werase(Map);
+	
+		// Paused Game
+		if(paused != true) {
+			UpdatePosition();
+			werase(Map);
+			showCharacter(Map);
+			directionControl();
+		}
 		
 		SpawnFood();
 		
 		UpdateScore(Score, point);
-		UpdatePosition();
-		
-		showCharacter(Map);
-
-		for(int i = 1; i < bodyLength; i++) {
-			if(xHead == xBody[i] && yHead == yBody[i]) {
-				gameOver = true;
-			}
-		}
-		
-		directionControl();
 		
 		usleep(120000); // miliseconds
 		wrefresh(Map);
 		wrefresh(Score);
-	}
-	
-	return true;
-}
-
-// Looping Game
-bool Game::Play() {
-	bool exit = false;
-	while(exit != true) {
-		if(render() == true) {
-			if(GameOver() == true) {
-				GameOver();
-				exit = true;
+		
+		for(int i = 0; i < bodyLength; ++i) {
+			if(xHead == xBody[i] && yHead == yBody[i]) {
+				gameOver = true;
 			}
 		}
+
+		if(gameOver == true) {
+				werase(Map);
+				box(Map, 0, 0);
+				wrefresh(Map);
+				ShowPopUpGameOver();
+				readData();
+				if(point > highestScore) {
+					saveData();
+				}
+
+				if(playAgain == false) {
+					gameOver = false;
+					exit = true;
+				} else {
+					gameOver = false;	
+					resetSnake();
+				}
+		}
 	}
-	return exit;
+	return 0;
 }
 
 Game::~Game() {

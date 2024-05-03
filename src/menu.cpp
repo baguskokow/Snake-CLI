@@ -4,8 +4,6 @@
  *
  *	Author : Bagus Koko Wibawanto
  *
- *	Version : 1.0
- *
  * ########################################
  *
  * */
@@ -15,11 +13,12 @@
 #include <string.h>
 #include "../include/snake.hpp"
 
+// Main Menu
 void Game::Menu() {
 	refresh();
 	curs_set(FALSE);
 	noecho();
-	std::string listMenu[3] = {" Play ", " Best Score ", " Quit "};
+	std::string listMenu[3] = {" Play ", " High Score ", " Quit "};
 	box(MenuWindow, 0, 0);
 	wrefresh(MenuWindow);
 	keypad(MenuWindow, TRUE);
@@ -59,8 +58,18 @@ void Game::Menu() {
 				}
 				highlight++;
 				break;
+			case 10: // Enter
+				if(highlight == 0) {
+					render();
+				} else if(highlight == 1) {
+					ShowBestScore();
+				} else if(highlight == 2) {
+					exit = true;
+				}
 			default:
 				break;
 		}
+		box(MenuWindow, 0, 0);
 	}
 }
+

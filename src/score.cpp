@@ -4,8 +4,6 @@
  *
  *	Author : Bagus Koko Wibawanto
  *
- *	Version : 1.0
- *
  * ########################################
  *
  * */
@@ -26,4 +24,39 @@ void Game::UpdateScore(WINDOW* Score, int pointNow) {
 	std::string pointString = std::to_string(point);
 	mvwprintw(Score, 2, 7.5, pointString.c_str());
 	wrefresh(Score);
+}
+
+// Show Best Score
+void Game::ShowBestScore() {
+	refresh();
+	curs_set(FALSE);
+	noecho();
+	box(BestScoreWindow, 0, 0);
+	wrefresh(BestScoreWindow);
+	keypad(BestScoreWindow, TRUE);
+	readData();
+	bool exit = false;
+
+	while(exit != true) {
+		mvwprintw(BestScoreWindow, 0, 0, "[ q ]");
+		mvwprintw(BestScoreWindow, 0, 6, "[ r ]");
+		mvwprintw(BestScoreWindow, 2, 7, "High Score");
+		mvwprintw(BestScoreWindow, 4, 11, highScoreString.c_str());
+		refresh();
+
+		int choice = wgetch(BestScoreWindow);
+
+		switch(choice) {
+			case 'q':
+				exit = true;
+				break;
+			case 'r':
+				showConfirmPopUp();
+				break;
+			default:
+				break;
+		}
+	
+		box(BestScoreWindow, 0, 0);
+	}
 }

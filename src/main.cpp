@@ -4,8 +4,6 @@
  *
  *	Author : Bagus Koko Wibawanto
  *
- *	Version : 1.0
- *
  * ########################################
  *
  * */
@@ -29,8 +27,12 @@ int main() {
 			throw "Small Terminal";
 		}
 
-		//Map->Menu();
-		Map->render();
+		Map->Menu();
+		//Map->showSuccessPopUp();
+		//Map->showConfirmPopUp();
+		//Map->render();
+//		Map->GameOver();
+	//	Map->ShowPopUpGameOver();
 	}
 
 	catch(const char* error) {

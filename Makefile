@@ -4,8 +4,8 @@ LDLIBS := ncurses
 OBJECT := build/objects
 BIN := build/bin
 
-all: build main.o snake.o characters.o control.o score.o savedata.o menu.o
-	$(CXX) $(CXX_FLAGS) $(OBJECT)/main.o $(OBJECT)/snake.o $(OBJECT)/characters.o $(OBJECT)/control.o $(OBJECT)/score.o $(OBJECT)/savedata.o $(OBJECT)/menu.o -L include/ncurses -l$(LDLIBS) -o $(BIN)/snake
+all: build main.o snake.o characters.o control.o score.o savedata.o menu.o gameover.o removewindow.o popup.o
+	$(CXX) $(CXX_FLAGS) $(OBJECT)/main.o $(OBJECT)/snake.o $(OBJECT)/characters.o $(OBJECT)/control.o $(OBJECT)/score.o $(OBJECT)/savedata.o $(OBJECT)/menu.o $(OBJECT)/gameover.o $(OBJECT)/removewindow.o $(OBJECT)/popup.o -L include/ncurses -l$(LDLIBS) -o $(BIN)/snake
 
 build:
 	if [ ! -d build/objects ] && [ ! -d build/bin ]; then \
@@ -33,6 +33,15 @@ savedata.o:
 
 menu.o:
 	$(CXX) -c src/menu.cpp $(CXX_FLAGS) -o $(OBJECT)/menu.o
+
+gameover.o:
+	$(CXX) -c src/gameover.cpp $(CXX_FLAGS) -o $(OBJECT)/gameover.o
+
+removewindow.o:
+	$(CXX) -c src/removewindow.cpp $(CXX_FLAGS) -o $(OBJECT)/removewindow.o
+
+popup.o:
+	$(CXX) -c src/popup.cpp $(CXX_FLAGS) -o $(OBJECT)/popup.o
 
 install:
 	@sudo cp $(BIN)/snake /usr/local/bin/snake

@@ -4,12 +4,9 @@
  *
  *	Author : Bagus Koko Wibawanto
  *
- *	Version : 1.0
- *
  * ########################################
  *
  * */
-
 
 #include <unistd.h>
 #include <string.h>
@@ -37,6 +34,10 @@ class Game {
 		WINDOW *Score;
 		WINDOW *GameOverPopUp;
 		WINDOW *MenuWindow;
+		WINDOW *BestScoreWindow;
+		WINDOW *GameOverWindow;
+		WINDOW *ConfirmWindow;
+		WINDOW *SuccessWindow;
 
 		// Member Property to Get Length Windows Name
 		size_t LengthName;
@@ -48,7 +49,9 @@ class Game {
 
 		// Default Point
 		int point = 0;
+		std::string lastPoint = std::to_string(point);
 		int highestScore;
+		std::string highScoreString = std::to_string(highestScore);
 
 		// Size of Window Map
 		int xMax;
@@ -67,8 +70,8 @@ class Game {
 		int bodyLength = 4; 
 
 		// Default Position xHead & yHead
-		int xHead = 5; // Position of X Head
-		int yHead = 4; // Position of Y Head
+		int xHead; // Position of X Head
+		int yHead; // Position of Y Head
 					
 		//Random Food Position
 		int yRandom;
@@ -83,20 +86,21 @@ class Game {
 		int yDirection = 0;
 		
 		// Continue Keypad
-		bool isContinue;
+		bool playAgain = true;
+
 
 	public:	
-		// Exit or Play Again
-		bool end = false;
-		bool playAgain = false;
 		Game(int, int, int, int, const char*);
 		void UpdateScore(WINDOW*, int);
 		bool render();
 		bool GameOver();
+		bool ShowPopUpGameOver();
 		bool Play();
 		void Menu();
 		void startPosition();
 		void UpdatePosition();
+		int xHeadRandom();
+		int yHeadRandom();
 		void showCharacter(WINDOW*);
 		void controlSnakeHead();
 		void generateFood(WINDOW*, int, int);
@@ -111,7 +115,16 @@ class Game {
 		int getRowTerminalSize();
 		int getColumnTerminalSize();
 		void saveData();
-		int readData();
+		void readData();
+		void resetData();
+		void ShowBestScore();
+		void removeScoreWindow();
+		void removeConfirmWindow();
+		void removeSuccessWindow();
+		void removeHighScoreWindow();
+		void resetSnake();
+		void showConfirmPopUp();
+		bool showSuccessPopUp();
 		~Game();
 };
 

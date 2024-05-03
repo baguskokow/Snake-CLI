@@ -4,8 +4,6 @@
  *
  *	Author : Bagus Koko Wibawanto
  *
- *	Version : 1.0
- *
  * ########################################
  *
  * */
@@ -14,6 +12,38 @@
 #include <algorithm>
 #include "../include/snake.hpp"
 
+
+// Random X position of Snake Head
+int Game::xHeadRandom() {
+	std::srand(time(0));
+	int xMax = 50 - 10;
+
+	int xRandom = std::rand() % xMax;
+	
+	if(xRandom < 5) {
+		return xRandom + 1;
+	} else if(xRandom > 42) {
+		return xRandom - 5;
+	} else {
+		return xRandom;
+	}
+}
+
+// Random Y position
+int Game::yHeadRandom() {
+	std::srand(time(0));
+	int yMax = 20 - 10;
+	
+	int yRandom = std::rand() % yMax;
+	
+	if(yRandom < 5) {
+		return yRandom + 1;
+	} else if(yRandom > 12) {
+		return yRandom - 4;
+	} else {
+		return yRandom;
+	}
+}
 // Inisialization Start Position
 void Game::startPosition() {
 	for(int i = 0; i < bodyLength; ++i) {
@@ -42,6 +72,21 @@ void Game::showCharacter(WINDOW* Map) {
 	}
 }
 
+// Reset Snake
+void Game::resetSnake() {
+	point = 0;
+	bodyLength = 4;
+	xHead = xHeadRandom(); 
+	yHead = xHead - 1; 
+
+	// Start Position
+	for(int i = 0; i < bodyLength; ++i) {
+		xBody[i] = xHead - i - 1;
+		yBody[i] = yHead;
+	}
+}
+
+// Control the Snake Head when it exits the map
 void Game::controlSnakeHead() {
 	if(xHead > 48) {
 		xHead = 1;
@@ -54,6 +99,7 @@ void Game::controlSnakeHead() {
 	}
 }
 
+// Random X position
 int Game::xFoodRandom() {
 	std::srand(time(0));
 	int xMax = 50 - 2;
@@ -69,6 +115,7 @@ int Game::xFoodRandom() {
 	}
 }
 
+// Random Y position
 int Game::yFoodRandom() {
 	std::srand(time(0));
 	int yMax = 20 - 2;
@@ -84,10 +131,12 @@ int Game::yFoodRandom() {
 	}
 }
 
+// Generate Food at Map
 void Game::generateFood(WINDOW* Map, int yFood, int xFood) {
 	mvwaddch(Map, yFood, xFood, Food);
 }
 
+// Spawn Food
 void Game::SpawnFood() {
 	if(yRandom == 0 && xRandom == 0) {
 		yRandom = yFoodRandom();

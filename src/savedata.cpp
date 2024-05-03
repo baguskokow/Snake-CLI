@@ -4,8 +4,6 @@
  *
  *	Author : Bagus Koko Wibawanto
  *
- *	Version : 1.0
- *
  * ########################################
  *
  * */
@@ -17,25 +15,35 @@
 // Save Score
 void Game::saveData() {
 	//std::string homeDirectory = getenv("HOME");
-	std::ofstream bestScore;
+	std::ofstream highScore;
 
-	bestScore.open("savedata/score.txt", std::ios::out);
+	highScore.open("savedata/score.txt", std::ios::out);
 
-	bestScore << point;
-	bestScore.close();
+	highScore << point;
+	highScore.close();
 }
 
 // Read
-int Game::readData() {
+void Game::readData() {
 	std::ifstream bestScore("savedata/score.txt");
-	std::string highScore;
 
 	if(bestScore.is_open()) {
-		getline(bestScore, highScore);
+		getline(bestScore, highScoreString);
 		bestScore.close();
 	} else {
-		highScore = '0';
+		highScoreString = '0';
 	}
 	
-	return highestScore = std::stoi(highScore);
+	highestScore = std::stoi(highScoreString);
+}
+
+// Reset Data
+void Game::resetData() {
+	this->highestScore = 0;
+	std::ofstream highScore;
+
+	highScore.open("savedata/score.txt", std::ios::out);
+
+	highScore << highestScore;
+	highScore.close();
 }
