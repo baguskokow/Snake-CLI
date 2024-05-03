@@ -74,18 +74,16 @@ void Game::showCharacter(WINDOW* Map) {
 
 // Reset Snake
 void Game::resetSnake() {
-//	for(int i = 1; i < bodyLength; i++) {
-//		xBody[i] = 0;
-//		yBody[i] = 0;
-//	}
 	point = 0;
 	bodyLength = 4;
-//	xHead = xHeadRandom(); 
-//	yHead = xHead - 1; 
-	//yHead = yHeadRandom(); 
-	xHead = 5;
-	yHead = 4;
-	startPosition();
+	xHead = xHeadRandom(); 
+	yHead = xHead - 1; 
+
+	// Start Position
+	for(int i = 0; i < bodyLength; ++i) {
+		xBody[i] = xHead - i - 1;
+		yBody[i] = yHead;
+	}
 }
 
 // Control the Snake Head when it exits the map

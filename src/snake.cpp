@@ -147,7 +147,7 @@ bool Game::render() {
 		wrefresh(Map);
 		wrefresh(Score);
 		
-		for(int i = bodyLength - 1; i > 0; --i) {
+		for(int i = 0; i < bodyLength; ++i) {
 			if(xHead == xBody[i] && yHead == yBody[i]) {
 				gameOver = true;
 			}
@@ -164,14 +164,15 @@ bool Game::render() {
 				}
 
 				if(playAgain == false) {
-					exit = true;
 					gameOver = false;
+					exit = true;
 				} else {
 					gameOver = false;	
 					resetSnake();
 				}
 		}
 	}
+	return 0;
 }
 
 Game::~Game() {
