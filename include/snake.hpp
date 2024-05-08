@@ -38,6 +38,8 @@ class Game {
 		WINDOW *GameOverWindow;
 		WINDOW *ConfirmWindow;
 		WINDOW *SuccessWindow;
+		WINDOW *SkinPreviewWindow;
+		WINDOW *MapN;
 
 		// Member Property to Get Length Windows Name
 		size_t LengthName;
@@ -63,7 +65,7 @@ class Game {
 
 		// Characters
 		char Food= '*'; // Food Character
-		char SnakeHead = '@'; // Snake Head
+		char SnakeHead = 'V'; // Snake Head
 		char SnakeBody = '+'; // Snake Body
 
 		// Default Body Length
@@ -87,6 +89,15 @@ class Game {
 		
 		// Continue Keypad
 		bool playAgain = true;
+
+		// Skin
+		struct Skin {
+			char vi = 'V';
+			char ziro = '0';
+			char ate = '@'; // default
+			char gi = 'G';
+		};
+		int highlight = 0;
 
 
 	public:	
@@ -125,6 +136,11 @@ class Game {
 		void resetSnake();
 		void showConfirmPopUp();
 		bool showSuccessPopUp();
+		bool chooseSkin();
+		bool vSkin();
+		bool ziroSkin();
+		bool ateSkin();
+		bool theGSkin();
 		~Game();
 };
 

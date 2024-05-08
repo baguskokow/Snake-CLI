@@ -25,6 +25,7 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 
 	// Map Window Inisialization
 	this->Map = newwin(Height, Width, WindowVerticalPosition, WindowHorizontalPosition);
+	this->MapN = newwin(17, 46, 2, 2);
 
 	// Score Window Inisialization
 	this->Score = newwin(Height / 4, Width / 3, WindowVerticalPosition + 7.5, WindowHorizontalPosition + Width + 5); 
@@ -52,6 +53,9 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	
 	// Success Pop Up Window
 	this->SuccessWindow = newwin(7, 25, 6, 12);
+	
+	// Skin Preview Window
+	this->SkinPreviewWindow = newwin(5, 16, 7, 25);
 
 	// Get Terminal Size
 	getmaxyx(stdscr, rowTerminal, columnTerminal);
