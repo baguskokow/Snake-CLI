@@ -47,3 +47,28 @@ void Game::resetData() {
 	highScore << highestScore;
 	highScore.close();
 }
+
+// Save Skin
+void Game::saveDataSkin() {
+	std::ofstream skin;
+
+	skin.open("savedata/skin.txt", std::ios::out);
+
+	skin << skinSelected;
+	skin.close();
+}
+
+// Read Skin
+void Game::readDataSkin() {
+	std::ifstream skin("savedata/skin.txt");
+	std::string skinSelectedString;
+
+	if(skin.is_open()) {
+		getline(skin, skinSelectedString);
+		skin.close();
+	} else {
+		skinSelectedString = '2';
+	}
+	
+	skinSelected = std::stoi(skinSelectedString);
+}

@@ -64,6 +64,8 @@ void Game::Menu() {
 				} else if(highlight == 1) {
 					ShowBestScore();
 				} else if(highlight == 2) {
+					chooseSkin();
+				} else {
 					exit = true;
 				}
 			default:

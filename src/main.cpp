@@ -27,8 +27,8 @@ int main() {
 			throw "Small Terminal";
 		}
 
-		//Map->Menu();
-		Map->chooseSkin();
+		Map->Menu();
+		//Map->chooseSkin();
 		//Map->vSkin();
 		//Map->showSuccessPopUp();
 		//Map->showConfirmPopUp();

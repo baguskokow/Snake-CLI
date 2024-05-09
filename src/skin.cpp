@@ -16,25 +16,26 @@
 bool Game::chooseSkin() {
         curs_set(FALSE);
         noecho();
-        std::string listMenu[4] = {" Vi ", " Ziro ", " Ate ", " The G "};
+        std::string listMenu[5] = {" Qi ", " Ziro ", " Ate ", " The G ", " Yu "};
         box(Map, 0, 0);
         bool exit = false;
         keypad(Map, TRUE);
         //int highlight = 0;
-        int yMenuWindow[4] = {6, 8, 10, 12};
-        int xMenuWindow[4] = {7, 7, 7, 7};
-        int selectedSkin = 1; // start index from 0
-        vSkin();
+        int yMenuWindow[5] = {4, 6, 8, 10, 12};
+        int xMenuWindow[5] = {7, 7, 7, 7, 7};
+        //int selectedSkin = 1; // start index from 0
+        SkinPreview();
         wrefresh(Map);
-        wrefresh(MapN);
+        wrefresh(ShadowMap);
 
         while(exit != true) {
-                for(int i = 0; i < 4; i++){
+                for(int i = 0; i < 5; i++){
                         mvwprintw(Map, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
                 }
+                mvwprintw(Map, 0, 1, "[ q ]");
                 mvwprintw(Map, 18, 15, "Press Space To Select");
 
-                for(int i = 0; i < 4; i++) {
+                for(int i = 0; i < 5; i++) {
                         if(i == highlight) {
                                 wattron(Map, A_REVERSE);
                                 mvwprintw(Map, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
@@ -42,19 +43,19 @@ bool Game::chooseSkin() {
                         }
                 }
         
+                readDataSkin();
+
                 // Show Detail Selected Skin
-                if(selectedSkin == highlight) {
-                        mvwprintw(MapN, 10, 25, "[ Selected ]");
-                        wrefresh(MapN);
+                if(skinSelected == highlight) {
+                        mvwprintw(ShadowMap, 0, 2, "[ Selected ]");
+                        wrefresh(ShadowMap);
                 } else {
-                        werase(MapN);
-                        wrefresh(MapN);
+                        werase(ShadowMap);
+                        wrefresh(ShadowMap);
                 }
 
-                
                 // Show Preview
-                vSkin();
-
+                SkinPreview();
 
                 int choice = wgetch(Map);
 
@@ -67,34 +68,52 @@ bool Game::chooseSkin() {
                                 highlight--;
                                 break;
                         case KEY_DOWN:
-                                if(highlight == 3) {
-                                        highlight = 3;
+                                if(highlight == 4) {
+                                        highlight = 4;
                                         break;
                                 }
                                 highlight++;
                                 break;
                         case ' ':
-                                selectedSkin = highlight;
-                                
+                                skinSelected = highlight;
+                                saveDataSkin();
+                                break;
+                        case 'q':
+                                exit = true;
                         default:
                                 break;
                 }
                 
         }
+        
+        if(skinSelected == 0) {
+                SnakeHead = 'Q';
+        } else if (skinSelected == 1) {
+                SnakeHead = '0';
+        } else if (skinSelected == 2) {
+                SnakeHead = '@';
+        } else if (skinSelected == 3) {
+                SnakeHead = 'G';
+        } else {
+                SnakeHead = 'U';
+        }
+
         return 0;
 }
 
-bool Game::vSkin() {
+bool Game::SkinPreview() {
         werase(SkinPreviewWindow);
         box(SkinPreviewWindow, 0, 0);
         if(highlight == 0) {
-                mvwprintw(SkinPreviewWindow, 2, 6, "V+++");
+                mvwprintw(SkinPreviewWindow, 2, 6, "Q+++");
         } else if(highlight == 1) {
                 mvwprintw(SkinPreviewWindow, 2, 6, "0+++");
         } else if(highlight == 2) {
                 mvwprintw(SkinPreviewWindow, 2, 6, "@+++");
-        } else {
+        } else if(highlight == 3) {
                 mvwprintw(SkinPreviewWindow, 2, 6, "G+++");
+        } else {
+                mvwprintw(SkinPreviewWindow, 2, 6, "U+++");
         }
         wrefresh(SkinPreviewWindow);
 

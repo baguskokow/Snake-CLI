@@ -39,7 +39,8 @@ class Game {
 		WINDOW *ConfirmWindow;
 		WINDOW *SuccessWindow;
 		WINDOW *SkinPreviewWindow;
-		WINDOW *MapN;
+		WINDOW *ShadowMap;
+		WINDOW *CoinMap;
 
 		// Member Property to Get Length Windows Name
 		size_t LengthName;
@@ -90,13 +91,10 @@ class Game {
 		// Continue Keypad
 		bool playAgain = true;
 
-		// Skin
-		struct Skin {
-			char vi = 'V';
-			char ziro = '0';
-			char ate = '@'; // default
-			char gi = 'G';
-		};
+		// Skin Selected
+		int skinSelected;
+
+		// Highlight Menu (Global Variable)
 		int highlight = 0;
 
 
@@ -137,10 +135,9 @@ class Game {
 		void showConfirmPopUp();
 		bool showSuccessPopUp();
 		bool chooseSkin();
-		bool vSkin();
-		bool ziroSkin();
-		bool ateSkin();
-		bool theGSkin();
+		bool SkinPreview();
+		void saveDataSkin();
+		void readDataSkin();
 		~Game();
 };
 
