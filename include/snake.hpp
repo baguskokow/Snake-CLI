@@ -66,7 +66,7 @@ class Game {
 
 		// Characters
 		char Food= '*'; // Food Character
-		char SnakeHead = 'V'; // Snake Head
+		char SnakeHead; // Snake Head
 		char SnakeBody = '+'; // Snake Body
 
 		// Default Body Length

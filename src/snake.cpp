@@ -97,6 +97,7 @@ bool Game::render() {
 	bool gameOver = false;
 	bool paused = false;
 	bool exit = false;
+	readDataSkin(); // Read Skin Selected
 
 	while(exit != true) {
 		box(Map, 0, 0);

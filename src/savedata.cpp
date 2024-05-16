@@ -71,4 +71,17 @@ void Game::readDataSkin() {
 	}
 	
 	skinSelected = std::stoi(skinSelectedString);
+
+	// Apply Skin When Start the Game
+  if(skinSelected == 0) {
+          SnakeHead = 'Q';
+  } else if (skinSelected == 1) {
+          SnakeHead = '0';
+  } else if (skinSelected == 2) {
+          SnakeHead = '@';
+  } else if (skinSelected == 3) {
+          SnakeHead = 'G';
+  } else {
+          SnakeHead = 'U';
+  }
 }
