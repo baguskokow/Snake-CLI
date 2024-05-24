@@ -97,6 +97,10 @@ class Game {
 		// Highlight Menu (Global Variable)
 		int highlight = 0;
 
+		// Money
+		int money = 0;
+		std::string moneyString = std::to_string(money);
+
 
 	public:	
 		Game(int, int, int, int, const char*);
@@ -138,6 +142,10 @@ class Game {
 		bool SkinPreview();
 		void saveDataSkin();
 		void readDataSkin();
+		void showCoin();
+		void rewardMoney();
+		void saveDataMoney();
+		void readDataMoney();
 		~Game();
 };
 

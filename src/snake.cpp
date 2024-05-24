@@ -39,7 +39,7 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	this->GameOverPopUp = newwin(9, 25, 6, 12);
 
 	// Menu Window
-	this->MenuWindow = newwin(20, 50, 0, 0);
+	this->MenuWindow = newwin(20, 50, 2, 0);
 	
 	// Game Over Window
 	this->GameOverWindow = newwin(20, 50, 0, 0);
@@ -60,9 +60,9 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	this->ShadowMap = newwin(2, 16, 12, 25);
 
 	// Coin Map
-	this->CoinMap = newwin(2, 10, 1, 39);
+	this->CoinMap = newwin(2, 19, 0, 31);
 
-	// Get Terminal Size
+	// Get Size
 	getmaxyx(stdscr, rowTerminal, columnTerminal);
 
 	// Title Score Window
@@ -172,6 +172,10 @@ bool Game::render() {
 				if(point > highestScore) {
 					saveData();
 				}
+				
+				//readDataMoney();
+				rewardMoney();
+				saveDataMoney();
 
 				if(playAgain == false) {
 					gameOver = false;

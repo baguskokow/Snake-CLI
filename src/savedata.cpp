@@ -85,3 +85,27 @@ void Game::readDataSkin() {
           SnakeHead = 'U';
   }
 }
+
+// Save Data Money
+void Game::saveDataMoney() {
+	std::ofstream Money;
+
+	Money.open("savedata/money.txt", std::ios::out);
+
+	Money << money;
+	Money.close();
+}
+
+// Read
+void Game::readDataMoney() {
+	std::ifstream Money("savedata/money.txt");
+
+	if(Money.is_open()) {
+		getline(Money, moneyString);
+		Money.close();
+	} else {
+		moneyString = '0';
+	}
+	
+	money = std::stoi(moneyString);
+}

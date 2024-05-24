@@ -18,22 +18,23 @@ void Game::Menu() {
 	refresh();
 	curs_set(FALSE);
 	noecho();
-	std::string listMenu[4] = {" Play ", " High Score ", " Skin ", " Quit "};
+	std::string listMenu[5] = {" Play ", " Shop ", " High Score ", " Skin ", " Quit "};
 	box(MenuWindow, 0, 0);
 	wrefresh(MenuWindow);
 	keypad(MenuWindow, TRUE);
 	bool exit = false;
 	int highlight = 0;
-	int yMenuWindow[4] = {7, 9, 11, 13};
-	int xMenuWindow[4] = {22, 19, 22, 22};
-
+	int yMenuWindow[5] = {5, 7, 9, 11, 13};
+	int xMenuWindow[5] = {22, 22, 19, 22, 22};
+	showCoin();
 
 	while(exit != true) {
-		for(int i = 0; i < 4; i++){
+		showCoin();
+		for(int i = 0; i < 5; i++){
 			mvwprintw(MenuWindow, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
-		}
+		}	
 
-		for(int i = 0; i < 4; i++) {
+		for(int i = 0; i < 5; i++) {
 			if(i == highlight) {
 				wattron(MenuWindow, A_REVERSE);
 				mvwprintw(MenuWindow, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
@@ -52,8 +53,8 @@ void Game::Menu() {
 				highlight--;
 				break;
 			case KEY_DOWN:
-				if(highlight == 3) {
-					highlight = 3;
+				if(highlight == 4) {
+					highlight = 4;
 					break;
 				}
 				highlight++;
@@ -71,7 +72,9 @@ void Game::Menu() {
 			default:
 				break;
 		}
+		werase(MenuWindow);
 		box(MenuWindow, 0, 0);
+		refresh();
 	}
 }
 
