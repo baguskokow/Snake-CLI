@@ -41,7 +41,7 @@ bool Game::ShowPopUpGameOver() {
 }
 
 // Show Confirm Pop Up
-void Game::showConfirmPopUp() {
+void Game::showConfirmPopUp(std::string message, std::string confirmName) {
    box(ConfirmWindow, 0, 0);
    refresh();
    curs_set(FALSE);
@@ -55,7 +55,8 @@ void Game::showConfirmPopUp() {
    bool exit = false;
      
      while(exit != true) {
-        mvwprintw(ConfirmWindow, 2, 2, "Are you sure to reset the high score?");
+        //mvwprintw(ConfirmWindow, 2, 2, "Are you sure to reset the high score?");
+        mvwprintw(ConfirmWindow, 2, 4, message.c_str());
 
 	      for(int i = 0; i < 2; i++){
 	        	mvwprintw(ConfirmWindow, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
@@ -88,12 +89,21 @@ void Game::showConfirmPopUp() {
             break;
           case 10:
             if(highlight == 0) {
+              if(confirmName == "resetData") {
                     resetData();
                     readData();
                     if(highestScore == 0) {
                             showSuccessPopUp();
                     }
                     exit = true;
+              } else if(confirmName == "buySkin") {
+                    if(Pay(skinIndex.at(skinWantToBuy)) == true) {
+                      showSuccessPopUp();
+                    } else if(Pay(skinIndex.at(skinWantToBuy)) == false) {
+                      NotificationPopUp("Not Enough Money!");
+                    }
+                    exit = true;
+              }
             } else if(highlight == 1) {
                     exit = true;
                     removeConfirmWindow();
@@ -129,4 +139,32 @@ bool Game::showSuccessPopUp() {
       }
     }
     return true;
+}
+
+// Notification Pop Up
+bool Game::NotificationPopUp(std::string message) {
+  curs_set(FALSE);
+  box(NotificationPopUpWindow, 0, 0);
+  bool exit = false;
+  keypad(NotificationPopUpWindow, TRUE);
+
+  while(exit != true) {
+    mvwprintw(NotificationPopUpWindow, 0, 0, "[ q ]");
+    //mvwprintw(GameOverPopUp, 4, 6, "[ GAME OVER ]");
+    mvwprintw(NotificationPopUpWindow, 4, 6, message.c_str());
+
+    int choice = wgetch(NotificationPopUpWindow);
+
+    switch(choice) {
+      case 'q':
+        exit = true;
+        break;
+      default:
+        break;
+    }
+
+    box(NotificationPopUpWindow, 0, 0);
+  }
+  
+  return true;
 }

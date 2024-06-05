@@ -4,8 +4,8 @@ LDLIBS := ncurses
 OBJECT := build/objects
 BIN := build/bin
 
-all: build main.o snake.o characters.o control.o score.o savedata.o menu.o gameover.o removewindow.o popup.o skin.o money.o
-	$(CXX) $(CXX_FLAGS) $(OBJECT)/main.o $(OBJECT)/snake.o $(OBJECT)/characters.o $(OBJECT)/control.o $(OBJECT)/score.o $(OBJECT)/savedata.o $(OBJECT)/menu.o $(OBJECT)/gameover.o $(OBJECT)/removewindow.o $(OBJECT)/popup.o $(OBJECT)/skin.o $(OBJECT)/money.o -L include/ncurses -l ncursesw -o $(BIN)/snake
+all: build main.o snake.o characters.o control.o score.o savedata.o menu.o gameover.o removewindow.o popup.o skin.o money.o shop.o
+	$(CXX) $(CXX_FLAGS) $(OBJECT)/main.o $(OBJECT)/snake.o $(OBJECT)/characters.o $(OBJECT)/control.o $(OBJECT)/score.o $(OBJECT)/savedata.o $(OBJECT)/menu.o $(OBJECT)/gameover.o $(OBJECT)/removewindow.o $(OBJECT)/popup.o $(OBJECT)/skin.o $(OBJECT)/money.o $(OBJECT)/shop.o -L include/ncurses -l ncursesw -o $(BIN)/snake
 
 build:
 	if [ ! -d build/objects ] && [ ! -d build/bin ]; then \
@@ -48,6 +48,9 @@ skin.o:
 
 money.o:
 	$(CXX) -c src/money.cpp $(CXX_FLAGS) -o $(OBJECT)/money.o
+
+shop.o:
+	$(CXX) -c src/shop.cpp $(CXX_FLAGS) -o $(OBJECT)/shop.o
 
 install:
 	@sudo cp $(BIN)/snake /usr/local/bin/snake

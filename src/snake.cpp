@@ -56,11 +56,23 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	// Skin Preview Window
 	this->SkinPreviewWindow = newwin(5, 16, 7, 25);
 
+	// Shop Window
+	this->ShopWindow = newwin(20, 50, 2, 0);
+
+	// Skins Window
+	this->QiSkinWindow = newwin(5, 16, 4, 5);
+	this->ZiroSkinWindow = newwin(5, 16, 4, 28);
+	this->AteSkinWindow = newwin(5, 16, 12, 5);
+	this->TheGSkinWindow = newwin(5, 16, 12, 28);
+
 	// Shadow Map
 	this->ShadowMap = newwin(2, 16, 12, 25);
 
 	// Coin Map
 	this->CoinMap = newwin(2, 19, 0, 31);
+	
+	// Notification Pop Up Window
+	this->NotificationPopUpWindow = newwin(9, 25, 6, 12);
 
 	// Get Size
 	getmaxyx(stdscr, rowTerminal, columnTerminal);

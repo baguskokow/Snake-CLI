@@ -96,7 +96,7 @@ void Game::saveDataMoney() {
 	Money.close();
 }
 
-// Read
+// Read Data Money
 void Game::readDataMoney() {
 	std::ifstream Money("savedata/money.txt");
 
@@ -108,4 +108,34 @@ void Game::readDataMoney() {
 	}
 	
 	money = std::stoi(moneyString);
+}
+
+// Read Collection Skin
+void Game::readDataCollectionSkin() {
+	std::string fileName = "savedata/collection-skin.txt";
+	std::string lineString;
+	int lineCount = 0;
+
+	std::ifstream Collection(fileName);
+	std::vector<std::string> skinCollectionTemporary;
+
+	if(Collection.is_open()) {
+		while(std::getline(Collection, lineString)) {
+			skinCollectionTemporary.push_back(lineString);
+			lineCount++;
+		}
+	} else {
+		std::cerr << "Failed to open file\n";
+	}
+
+	Collection.close();
+
+	for(int i = 0; i < lineCount; i++) {
+		for(int j = 0; j < skinIndex.size(); j++) {
+			if(skinIndex.at(j) == skinCollectionTemporary.at(i)) {
+				this->skinCollection[j] = skinIndex.at(j);
+				break;
+			}
+		}
+	}
 }

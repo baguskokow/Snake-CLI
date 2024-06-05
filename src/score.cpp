@@ -51,7 +51,7 @@ void Game::ShowBestScore() {
 				exit = true;
 				break;
 			case 'r':
-				showConfirmPopUp();
+				showConfirmPopUp("Are you sure to reset the high score?", "resetData");
 				break;
 			default:
 				break;

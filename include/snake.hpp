@@ -41,6 +41,13 @@ class Game {
 		WINDOW *SkinPreviewWindow;
 		WINDOW *ShadowMap;
 		WINDOW *CoinMap;
+		WINDOW *ShopWindow;
+		WINDOW *QiSkinWindow;
+		WINDOW *ZiroSkinWindow;
+		WINDOW *AteSkinWindow;
+		WINDOW *TheGSkinWindow;
+		WINDOW *YuSkinWindow;
+		WINDOW *NotificationPopUpWindow;
 
 		// Member Property to Get Length Windows Name
 		size_t LengthName;
@@ -98,9 +105,18 @@ class Game {
 		int highlight = 0;
 
 		// Money
-		int money = 0;
+		int money = 100;
 		std::string moneyString = std::to_string(money);
+		
+		// Index Skin
+		std::vector<std::string> skinIndex = {"Qi", "Ziro", "Ate", "The G"};
 
+		// Skin Collection
+		//std::vector<std::string> skinCollection;
+		std::string skinCollection[4];
+
+		// Skin Want To Buy It
+		int skinWantToBuy = 0;
 
 	public:	
 		Game(int, int, int, int, const char*);
@@ -136,7 +152,7 @@ class Game {
 		void removeSuccessWindow();
 		void removeHighScoreWindow();
 		void resetSnake();
-		void showConfirmPopUp();
+		void showConfirmPopUp(std::string, std::string);
 		bool showSuccessPopUp();
 		bool chooseSkin();
 		bool SkinPreview();
@@ -146,6 +162,15 @@ class Game {
 		void rewardMoney();
 		void saveDataMoney();
 		void readDataMoney();
+		void readDataCollectionSkin();
+		bool buySkin();
+		bool QiSkin();
+		bool ZiroSkin();
+		bool AteSkin();
+		bool TheGSkin();
+		bool ConfirmSkin();
+		bool Pay(std::string);
+		bool NotificationPopUp(std::string);
 		~Game();
 };
 
