@@ -139,3 +139,5 @@ void Game::readDataCollectionSkin() {
 		}
 	}
 }
+
+// Untuk write koleksi skin jangan lupa pake append di fstreamnya

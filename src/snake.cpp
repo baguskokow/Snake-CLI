@@ -24,7 +24,7 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	this->ScoreTitle = scoreTitle;
 
 	// Map Window Inisialization
-	this->Map = newwin(Height, Width, WindowVerticalPosition, WindowHorizontalPosition);
+	this->Map = newwin(Height, Width, WindowVerticalPosition + 2, WindowHorizontalPosition);
 
 	// Score Window Inisialization
 	this->Score = newwin(Height / 4, Width / 3, WindowVerticalPosition + 7.5, WindowHorizontalPosition + Width + 5); 
@@ -42,7 +42,7 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	this->MenuWindow = newwin(20, 50, 2, 0);
 	
 	// Game Over Window
-	this->GameOverWindow = newwin(20, 50, 0, 0);
+	this->GameOverWindow = newwin(20, 50, 2, 0);
 	
 	// High Score Window
 	this->BestScoreWindow = newwin(8, 25, 6, 12);

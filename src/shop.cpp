@@ -21,6 +21,10 @@ bool Game::buySkin() {
         bool exit = false;
         keypad(ShopWindow, TRUE);
         int highlight = 0;
+        bool availableQi = 1;
+        bool availableZiro = 1;
+        bool availableAte = 1;
+        bool availableTheG = 1;
         int yMenuWindow[4] = {8, 8, 16, 16};
         int xMenuWindow[4] = {11, 33, 11, 33};
         wrefresh(ShopWindow);
@@ -30,10 +34,33 @@ bool Game::buySkin() {
                 for(int i = 0; i < 4; i++){
                         if(skinCollection[i] == "Qi" || skinCollection[i] == "Ziro" || skinCollection[i] == "Ate"  || skinCollection[i] == "The G") {
                                 mvwprintw(ShopWindow, yMenuWindow[i], xMenuWindow[i], " Owned ");
+
                         } else {
                                 mvwprintw(ShopWindow, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
                         }
                 }
+
+                for(int i = 0; i < 4; i++){
+                        if(skinCollection[i] == "Qi") {
+                                availableQi = 0;        
+                        } 
+                }
+
+                for(int i = 0; i < 4; i++){
+                        if(skinCollection[i] == "Ziro") {
+                                availableZiro = 0;        
+                        }                 }
+
+                for(int i = 0; i < 4; i++){
+                        if(skinCollection[i] == "Ate") {
+                                availableAte = 0;        
+                        }                 }
+
+                for(int i = 0; i < 4; i++){
+                        if(skinCollection[i] == "The G") {
+                                availableTheG = 0;        
+                        }                 }
+
                 mvwprintw(ShopWindow, 0, 1, "[ q ]");
 
                 for(int i = 0; i < 4; i++) {
@@ -47,11 +74,14 @@ bool Game::buySkin() {
                                 wattroff(ShopWindow, A_REVERSE);
                         }
                 }
+
                 showCoin();        
                 QiSkin();
                 ZiroSkin();
                 AteSkin();
                 TheGSkin();
+                wrefresh(ShopWindow);
+                //box(ShopWindow, 0, 0);
                 
                 int choice = wgetch(ShopWindow);
 
@@ -92,14 +122,28 @@ bool Game::buySkin() {
                                 break;
                         case ' ':
                                 skinWantToBuy = highlight;
-                                showConfirmPopUp("Are you sure you want to buy it?", "buySkin");
+                                if(highlight == 0 && availableQi == 1) {
+                                        showConfirmPopUp("Are you sure you want to buy it?", "buySkin");
+                                        break;
+                                } else if(highlight == 1 && availableZiro == 1) {
+                                        showConfirmPopUp("Are you sure you want to buy it?", "buySkin");
+                                        break;
+                                } else if(highlight == 2 && availableAte == 1) {
+                                        showConfirmPopUp("Are you sure you want to buy it?", "buySkin");
+                                        break;
+                                } else if(highlight == 3 && availableTheG == 1) {
+                                        showConfirmPopUp("Are you sure you want to buy it?", "buySkin");
+                                        break;
+                                } else {
+                                        break;
+                                }
+                                
                                 break;
                         case 'q':
                                 exit = true;
                         default:
                                 break;
                 }
-                
         }
         
         return 0;

@@ -105,14 +105,13 @@ class Game {
 		int highlight = 0;
 
 		// Money
-		int money = 100;
+		int money;
 		std::string moneyString = std::to_string(money);
 		
 		// Index Skin
 		std::vector<std::string> skinIndex = {"Qi", "Ziro", "Ate", "The G"};
 
 		// Skin Collection
-		//std::vector<std::string> skinCollection;
 		std::string skinCollection[4];
 
 		// Skin Want To Buy It

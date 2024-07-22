@@ -13,15 +13,17 @@
 #include "../include/snake.hpp"
 
 void Game::showCoin() {
+	readDataMoney();
 	werase(CoinMap);
 	box(CoinMap, 0, 0);
 	noecho();
+	//moneyString = std::to_string(money);
 
-	readDataMoney();
 	mvwprintw(CoinMap, 1, 4, "[ $      ");
 	mvwprintw(CoinMap, 1, 9, moneyString.c_str());
 	mvwprintw(CoinMap, 1, 13, " ]");
 
+	refresh();
 	wrefresh(CoinMap);
 }
 
@@ -50,23 +52,25 @@ bool Game::Pay(std::string skinName) {
 		if(money <= Qi) {
 			success = false;
 		} else {
-			money - 35;
+			this->money - 35;
 			success = true;
 		}
 	} else if(skinName == "Ate") {
 		if(money <= Ate) {
 			success = false;
 		} else {
-			money - 115;
+			this->money - 115;
 			success = true;
 		}
 	} else if(skinName == "The G") {
 		if(money <= TheG) {
 			success = false;
 		} else {
-			money - 75;
+			this->money - 75;
 			success = true;
 		}
 	}
+	moneyString = std::to_string(money);
+	saveDataMoney();
 	return success;
 }

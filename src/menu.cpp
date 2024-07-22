@@ -61,10 +61,13 @@ void Game::Menu() {
 				break;
 			case 10: // Enter
 				if(highlight == 0) {
+					werase(MenuWindow);
 					render();
 				} else if(highlight == 1) {
-					ShowBestScore();
+					buySkin();
 				} else if(highlight == 2) {
+					ShowBestScore();
+				} else if(highlight == 3) {
 					chooseSkin();
 				} else {
 					exit = true;
