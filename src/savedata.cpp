@@ -140,4 +140,13 @@ void Game::readDataCollectionSkin() {
 	}
 }
 
-// Untuk write koleksi skin jangan lupa pake append di fstreamnya
+// Save data collection skin after buy a skin at shop
+void Game::saveDataCollectionSkin(std::string skinWantToBuy) {
+	std::ofstream Collection;
+
+	Collection.open("savedata/collection-skin.txt", std::ios::app);
+
+	Collection << skinWantToBuy;
+	Collection << "\n";
+	Collection.close();
+}

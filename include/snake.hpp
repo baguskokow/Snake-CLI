@@ -162,6 +162,7 @@ class Game {
 		void saveDataMoney();
 		void readDataMoney();
 		void readDataCollectionSkin();
+		void saveDataCollectionSkin(std::string);
 		bool buySkin();
 		bool QiSkin();
 		bool ZiroSkin();

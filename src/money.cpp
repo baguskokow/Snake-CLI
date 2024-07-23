@@ -72,6 +72,7 @@ bool Game::Pay(std::string skinName) {
 
 	if(PayProcess(this->money, cost) == true) {
 		success = true;
+		saveDataCollectionSkin(skinName);
 	} else {
 		success = false;
 	}

@@ -16,7 +16,7 @@
 bool Game::buySkin() {
         curs_set(FALSE);
         noecho();
-        std::string listMenu[4] = {" Buy ", " Buy ", " Buy ", " Buy "};
+        std::string listMenu[4] = {" Buy ", " Owned ", " Buy ", " Buy "};
         box(ShopWindow, 0, 0);
         bool exit = false;
         keypad(ShopWindow, TRUE);
@@ -28,11 +28,11 @@ bool Game::buySkin() {
         int yMenuWindow[4] = {8, 8, 16, 16};
         int xMenuWindow[4] = {11, 33, 11, 33};
         wrefresh(ShopWindow);
-        readDataCollectionSkin();
 
         while(exit != true) {
+                readDataCollectionSkin();
                 for(int i = 0; i < 4; i++){
-                        if(skinCollection[i] == "Qi" || skinCollection[i] == "Ziro" || skinCollection[i] == "Ate"  || skinCollection[i] == "The G") {
+                        if(skinCollection[i] == "Qi" || skinCollection[i] == "Ate" || skinCollection[i] == "The G") {
                                 mvwprintw(ShopWindow, yMenuWindow[i], xMenuWindow[i], " Owned ");
 
                         } else {
@@ -47,19 +47,16 @@ bool Game::buySkin() {
                 }
 
                 for(int i = 0; i < 4; i++){
-                        if(skinCollection[i] == "Ziro") {
-                                availableZiro = 0;        
-                        }                 }
-
-                for(int i = 0; i < 4; i++){
                         if(skinCollection[i] == "Ate") {
                                 availableAte = 0;        
-                        }                 }
+                        }                 
+                }
 
                 for(int i = 0; i < 4; i++){
                         if(skinCollection[i] == "The G") {
                                 availableTheG = 0;        
-                        }                 }
+                        } 
+                }
 
                 mvwprintw(ShopWindow, 0, 1, "[ q ]");
 
@@ -123,9 +120,6 @@ bool Game::buySkin() {
                         case ' ':
                                 skinWantToBuy = highlight;
                                 if(highlight == 0 && availableQi == 1) {
-                                        showConfirmPopUp("Are you sure you want to buy it?", "buySkin");
-                                        break;
-                                } else if(highlight == 1 && availableZiro == 1) {
                                         showConfirmPopUp("Are you sure you want to buy it?", "buySkin");
                                         break;
                                 } else if(highlight == 2 && availableAte == 1) {

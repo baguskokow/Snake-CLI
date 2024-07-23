@@ -16,7 +16,7 @@
 bool Game::chooseSkin() {
         curs_set(FALSE);
         noecho();
-        std::string listMenu[5] = {" Qi ", " Ziro ", " Ate ", " The G ", " Yu "};
+        std::string listMenu[4] = {" Qi ", " Ziro ", " Ate ", " The G "};
         box(Map, 0, 0);
         bool exit = false;
         keypad(Map, TRUE);
@@ -29,13 +29,13 @@ bool Game::chooseSkin() {
         wrefresh(ShadowMap);
 
         while(exit != true) {
-                for(int i = 0; i < 5; i++){
+                for(int i = 0; i < 4; i++){
                         mvwprintw(Map, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
                 }
                 mvwprintw(Map, 0, 1, "[ q ]");
                 mvwprintw(Map, 18, 15, "Press Space To Select");
 
-                for(int i = 0; i < 5; i++) {
+                for(int i = 0; i < 4; i++) {
                         if(i == highlight) {
                                 wattron(Map, A_REVERSE);
                                 mvwprintw(Map, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
