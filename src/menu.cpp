@@ -26,7 +26,6 @@ void Game::Menu() {
 	int highlight = 0;
 	int yMenuWindow[5] = {5, 7, 9, 11, 13};
 	int xMenuWindow[5] = {22, 22, 19, 22, 22};
-	showCoin();
 
 	while(exit != true) {
 		showCoin();

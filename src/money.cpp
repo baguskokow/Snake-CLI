@@ -13,6 +13,7 @@
 #include "../include/snake.hpp"
 
 void Game::showCoin() {
+	refresh();
 	readDataMoney();
 	werase(CoinMap);
 	box(CoinMap, 0, 0);
@@ -42,35 +43,38 @@ void Game::rewardMoney() {
 	}
 }
 
+bool Game::PayProcess(int moneyCurrent, int cost) {
+	bool success;
+	int resultMoney;
+
+	if (moneyCurrent <= cost) {
+		success = false;
+	} else {
+		resultMoney = moneyCurrent - cost;
+		this->money = resultMoney;
+		success = true;
+	}
+	return success;
+}
+
 bool Game::Pay(std::string skinName) {
-	int Qi = 35;
-	int Ate = 115;
-	int TheG = 75;
+	int cost;
+	if(skinName == "Qi") {
+		cost = 35;
+	} else if(skinName == "Ate") {
+		cost = 115;
+	} else if(skinName == "The G") {
+		cost = 75;
+	} else {
+		cost = 0;
+	}
 	bool success;
 
-	if(skinName == "Qi") {
-		if(money <= Qi) {
-			success = false;
-		} else {
-			this->money - 35;
-			success = true;
-		}
-	} else if(skinName == "Ate") {
-		if(money <= Ate) {
-			success = false;
-		} else {
-			this->money - 115;
-			success = true;
-		}
-	} else if(skinName == "The G") {
-		if(money <= TheG) {
-			success = false;
-		} else {
-			this->money - 75;
-			success = true;
-		}
+	if(PayProcess(this->money, cost) == true) {
+		success = true;
+	} else {
+		success = false;
 	}
-	moneyString = std::to_string(money);
-	saveDataMoney();
+
 	return success;
 }

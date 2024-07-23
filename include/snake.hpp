@@ -105,7 +105,7 @@ class Game {
 		int highlight = 0;
 
 		// Money
-		int money;
+		int money = 0;
 		std::string moneyString = std::to_string(money);
 		
 		// Index Skin
@@ -169,6 +169,7 @@ class Game {
 		bool TheGSkin();
 		bool ConfirmSkin();
 		bool Pay(std::string);
+		bool PayProcess(int, int);
 		bool NotificationPopUp(std::string);
 		~Game();
 };

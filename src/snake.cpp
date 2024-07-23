@@ -85,6 +85,7 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	// X & Y Snake Head
 	this->xHead = xHeadRandom();
 	this->yHead = yHeadRandom();
+	readDataMoney();
 }
 
 // Get Row Size of Terminal

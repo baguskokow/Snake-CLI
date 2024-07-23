@@ -92,7 +92,7 @@ void Game::saveDataMoney() {
 
 	Money.open("savedata/money.txt", std::ios::out);
 
-	Money << money;
+	Money << this->money;
 	Money.close();
 }
 
@@ -107,7 +107,7 @@ void Game::readDataMoney() {
 		moneyString = '0';
 	}
 	
-	money = std::stoi(moneyString);
+	this->money = std::stoi(moneyString);
 }
 
 // Read Collection Skin
