@@ -20,8 +20,8 @@ bool Game::GameOver() {
         bool exit = false;
         keypad(GameOverWindow, TRUE);
         int highlight = 0;
-        int yMenuWindow[3] = {8, 10};
-        int xMenuWindow[3] = {20, 18};
+        int yMenuWindow[2] = {8, 10};
+        int xMenuWindow[2] = {20, 18};
 
         while(exit != true) {
                 for(int i = 0; i < 2; i++){

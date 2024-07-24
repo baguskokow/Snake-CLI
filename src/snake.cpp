@@ -24,7 +24,7 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	this->ScoreTitle = scoreTitle;
 
 	// Map Window Inisialization
-	this->Map = newwin(Height, Width, WindowVerticalPosition, WindowHorizontalPosition);
+	this->Map = newwin(Height, Width, WindowVerticalPosition + 2, WindowHorizontalPosition);
 
 	// Score Window Inisialization
 	this->Score = newwin(Height / 4, Width / 3, WindowVerticalPosition + 7.5, WindowHorizontalPosition + Width + 5); 
@@ -39,10 +39,10 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	this->GameOverPopUp = newwin(9, 25, 6, 12);
 
 	// Menu Window
-	this->MenuWindow = newwin(20, 50, 0, 0);
+	this->MenuWindow = newwin(20, 50, 2, 0);
 	
 	// Game Over Window
-	this->GameOverWindow = newwin(20, 50, 0, 0);
+	this->GameOverWindow = newwin(20, 50, 2, 0);
 	
 	// High Score Window
 	this->BestScoreWindow = newwin(8, 25, 6, 12);
@@ -52,8 +52,29 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	
 	// Success Pop Up Window
 	this->SuccessWindow = newwin(7, 25, 6, 12);
+	
+	// Skin Preview Window
+	this->SkinPreviewWindow = newwin(5, 16, 7, 25);
 
-	// Get Terminal Size
+	// Shop Window
+	this->ShopWindow = newwin(20, 50, 2, 0);
+
+	// Skins Window
+	this->QiSkinWindow = newwin(5, 16, 4, 5);
+	this->ZiroSkinWindow = newwin(5, 16, 4, 28);
+	this->AteSkinWindow = newwin(5, 16, 12, 5);
+	this->TheGSkinWindow = newwin(5, 16, 12, 28);
+
+	// Shadow Map
+	this->ShadowMap = newwin(2, 16, 12, 25);
+
+	// Coin Map
+	this->CoinMap = newwin(2, 19, 0, 31);
+	
+	// Notification Pop Up Window
+	this->NotificationPopUpWindow = newwin(9, 25, 6, 12);
+
+	// Get Size
 	getmaxyx(stdscr, rowTerminal, columnTerminal);
 
 	// Title Score Window
@@ -64,6 +85,7 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	// X & Y Snake Head
 	this->xHead = xHeadRandom();
 	this->yHead = yHeadRandom();
+	readDataMoney();
 }
 
 // Get Row Size of Terminal
@@ -88,6 +110,7 @@ bool Game::render() {
 	bool gameOver = false;
 	bool paused = false;
 	bool exit = false;
+	readDataSkin(); // Read Skin Selected
 
 	while(exit != true) {
 		box(Map, 0, 0);
@@ -162,6 +185,10 @@ bool Game::render() {
 				if(point > highestScore) {
 					saveData();
 				}
+				
+				//readDataMoney();
+				rewardMoney();
+				saveDataMoney();
 
 				if(playAgain == false) {
 					gameOver = false;

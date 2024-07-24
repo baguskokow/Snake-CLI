@@ -38,6 +38,16 @@ class Game {
 		WINDOW *GameOverWindow;
 		WINDOW *ConfirmWindow;
 		WINDOW *SuccessWindow;
+		WINDOW *SkinPreviewWindow;
+		WINDOW *ShadowMap;
+		WINDOW *CoinMap;
+		WINDOW *ShopWindow;
+		WINDOW *QiSkinWindow;
+		WINDOW *ZiroSkinWindow;
+		WINDOW *AteSkinWindow;
+		WINDOW *TheGSkinWindow;
+		WINDOW *YuSkinWindow;
+		WINDOW *NotificationPopUpWindow;
 
 		// Member Property to Get Length Windows Name
 		size_t LengthName;
@@ -63,7 +73,7 @@ class Game {
 
 		// Characters
 		char Food= '*'; // Food Character
-		char SnakeHead = '@'; // Snake Head
+		char SnakeHead; // Snake Head
 		char SnakeBody = '+'; // Snake Body
 
 		// Default Body Length
@@ -88,6 +98,24 @@ class Game {
 		// Continue Keypad
 		bool playAgain = true;
 
+		// Skin Selected
+		int skinSelected;
+
+		// Highlight Menu (Global Variable)
+		int highlight = 0;
+
+		// Money
+		int money = 0;
+		std::string moneyString = std::to_string(money);
+		
+		// Index Skin
+		std::vector<std::string> skinIndex = {"Qi", "Ziro", "Ate", "The G"};
+
+		// Skin Collection
+		std::string skinCollection[4];
+
+		// Skin Want To Buy It
+		int skinWantToBuy = 0;
 
 	public:	
 		Game(int, int, int, int, const char*);
@@ -123,8 +151,27 @@ class Game {
 		void removeSuccessWindow();
 		void removeHighScoreWindow();
 		void resetSnake();
-		void showConfirmPopUp();
+		void showConfirmPopUp(std::string, std::string);
 		bool showSuccessPopUp();
+		bool chooseSkin();
+		bool SkinPreview();
+		void saveDataSkin();
+		void readDataSkin();
+		void showCoin();
+		void rewardMoney();
+		void saveDataMoney();
+		void readDataMoney();
+		void readDataCollectionSkin();
+		void saveDataCollectionSkin(std::string);
+		bool buySkin();
+		bool QiSkin();
+		bool ZiroSkin();
+		bool AteSkin();
+		bool TheGSkin();
+		bool ConfirmSkin();
+		bool Pay(std::string);
+		bool PayProcess(int, int);
+		bool NotificationPopUp(std::string);
 		~Game();
 };
 
