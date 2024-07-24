@@ -11,7 +11,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <vector>
-#include "ncurses/ncurses.h"
+#include <ncurses.h>
 
 #ifndef __SNAKE
 #define __SNAKE
