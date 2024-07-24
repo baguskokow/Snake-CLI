@@ -16,7 +16,7 @@
 bool Game::buySkin() {
         curs_set(FALSE);
         noecho();
-        std::string listMenu[4] = {" Buy ", " Owned ", " Buy ", " Buy "};
+        std::string listMenu[4] = {" Buy ", " Owned ", " Buy ", " Buy "}; // Ziro skin by default is owned
         box(ShopWindow, 0, 0);
         bool exit = false;
         keypad(ShopWindow, TRUE);
@@ -30,6 +30,7 @@ bool Game::buySkin() {
         wrefresh(ShopWindow);
 
         while(exit != true) {
+                showCoin();        
                 readDataCollectionSkin();
                 for(int i = 0; i < 4; i++){
                         if(skinCollection[i] == "Qi" || skinCollection[i] == "Ate" || skinCollection[i] == "The G") {
@@ -39,7 +40,8 @@ bool Game::buySkin() {
                                 mvwprintw(ShopWindow, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
                         }
                 }
-
+                
+                // Checking if skin available or not for purchase
                 for(int i = 0; i < 4; i++){
                         if(skinCollection[i] == "Qi") {
                                 availableQi = 0;        
@@ -72,7 +74,6 @@ bool Game::buySkin() {
                         }
                 }
 
-                showCoin();        
                 QiSkin();
                 ZiroSkin();
                 AteSkin();

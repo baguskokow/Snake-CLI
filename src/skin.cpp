@@ -16,7 +16,9 @@
 bool Game::chooseSkin() {
         curs_set(FALSE);
         noecho();
-        std::string listMenu[4] = {" Qi ", " Ziro ", " Ate ", " The G "};
+        int skinCollectionCount = sizeof(skinCollection) / sizeof(skinCollection[0]);
+        std::vector<std::string> ensureSkinCollectionHaveValue {"False", "False", "False", "False"};
+        std::string listMenu[4] = {"!Qi", "!Ziro", "!Ate", "!The G"};
         box(Map, 0, 0);
         bool exit = false;
         keypad(Map, TRUE);
@@ -27,32 +29,57 @@ bool Game::chooseSkin() {
         SkinPreview();
         wrefresh(Map);
         wrefresh(ShadowMap);
+        readDataCollectionSkin();
 
         while(exit != true) {
-                for(int i = 0; i < 4; i++){
-                        mvwprintw(Map, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
+                // Read collection skin
+                readDataCollectionSkin();
+
+                // Print skin collection by collection skin data
+                for(int i = 0; i < skinCollectionCount; i++){
+                        if(skinCollection[i] == "Qi" || skinCollection[i] == "Ziro" || skinCollection[i] == "Ate" || skinCollection[i] == "The G") {
+                                mvwprintw(Map, yMenuWindow[i], xMenuWindow[i], skinCollection[i].c_str());
+                        } else {
+                                mvwprintw(Map, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
+                        }
                 }
+
                 mvwprintw(Map, 0, 1, "[ q ]");
                 mvwprintw(Map, 18, 15, "Press Space To Select");
 
-                for(int i = 0; i < 4; i++) {
-                        if(i == highlight) {
-                                wattron(Map, A_REVERSE);
-                                mvwprintw(Map, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
-                                wattroff(Map, A_REVERSE);
-                        }
-                }
-        
+               for(int i = 0; i < 4; i++) {
+                       if(i == highlight) {
+                               wattron(Map, A_REVERSE);
+                               if(skinCollection[i] == "Qi" || skinCollection[i] == "Ziro" || skinCollection[i] == "Ate" || skinCollection[i] == "The G") {
+                                       mvwprintw(Map, yMenuWindow[i], xMenuWindow[i], skinCollection[i].c_str());
+                               } else {
+                                       mvwprintw(Map, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
+                               }
+                               wattroff(Map, A_REVERSE);
+                       }
+               }
+                
+                // Read current selected skin that will use when playing game
                 readDataSkin();
 
                 // Show Detail Selected Skin
-                if(skinSelected == highlight) {
-                        mvwprintw(ShadowMap, 0, 2, "[ Selected ]");
-                        wrefresh(ShadowMap);
-                } else {
-                        werase(ShadowMap);
-                        wrefresh(ShadowMap);
-                }
+               if(skinSelected == highlight) {
+                       for(int i = 0; i < skinCollectionCount; i++) {
+                               if(skinCollection[i] == "Qi" || skinCollection[i] == "Ziro" || skinCollection[i] == "Ate" || skinCollection[i] == "The G") {
+                                       ensureSkinCollectionHaveValue.at(i) = "True";
+                                       
+                               } else {
+                                       ensureSkinCollectionHaveValue.at(i) = "False";
+                               }
+                       }
+                       if(ensureSkinCollectionHaveValue.at(skinSelected) == "True") {
+                               mvwprintw(ShadowMap, 0, 2, "[ Selected ]");
+                               wrefresh(ShadowMap);
+                       }
+               } else {
+                       werase(ShadowMap);
+                       wrefresh(ShadowMap);
+               }
 
                 // Show Preview
                 SkinPreview();
@@ -68,8 +95,8 @@ bool Game::chooseSkin() {
                                 highlight--;
                                 break;
                         case KEY_DOWN:
-                                if(highlight == 4) {
-                                        highlight = 4;
+                                if(highlight == skinCollectionCount - 1) {
+                                        highlight = skinCollectionCount - 1;
                                         break;
                                 }
                                 highlight++;
@@ -86,6 +113,7 @@ bool Game::chooseSkin() {
                 
         }
         
+        // At below, change head snake that use when playing game
         if(skinSelected == 0) {
                 SnakeHead = 'Q';
         } else if (skinSelected == 1) {
@@ -94,8 +122,6 @@ bool Game::chooseSkin() {
                 SnakeHead = '@';
         } else if (skinSelected == 3) {
                 SnakeHead = 'G';
-        } else {
-                SnakeHead = 'U';
         }
 
         return 0;
@@ -112,9 +138,8 @@ bool Game::SkinPreview() {
                 mvwprintw(SkinPreviewWindow, 2, 6, "@+++");
         } else if(highlight == 3) {
                 mvwprintw(SkinPreviewWindow, 2, 6, "G+++");
-        } else {
-                mvwprintw(SkinPreviewWindow, 2, 6, "U+++");
-        }
+        } 
+
         wrefresh(SkinPreviewWindow);
 
         return 0;

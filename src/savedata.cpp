@@ -130,6 +130,7 @@ void Game::readDataCollectionSkin() {
 
 	Collection.close();
 
+	// Set value as sequentialy at every index skinCollection array, referenced by skinIndex array
 	for(int i = 0; i < lineCount; i++) {
 		for(int j = 0; j < skinIndex.size(); j++) {
 			if(skinIndex.at(j) == skinCollectionTemporary.at(i)) {
