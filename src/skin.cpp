@@ -40,6 +40,7 @@ bool Game::chooseSkin() {
                         if(skinCollection[i] == "Qi" || skinCollection[i] == "Ziro" || skinCollection[i] == "Ate" || skinCollection[i] == "The G") {
                                 mvwprintw(Map, yMenuWindow[i], xMenuWindow[i], skinCollection[i].c_str());
                         } else {
+                                wrefresh(Map);
                                 mvwprintw(Map, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
                         }
                 }
@@ -110,6 +111,11 @@ bool Game::chooseSkin() {
                         default:
                                 break;
                 }
+               
+          werase(Map);
+          box(Map, 0, 0);
+          refresh();
+          wrefresh(Map);
                 
         }
         
