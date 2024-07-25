@@ -67,4 +67,5 @@ bool Game::GameOver() {
                                 break;
                 }
         }
+        return 0;
 }

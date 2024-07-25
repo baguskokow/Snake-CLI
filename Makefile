@@ -5,7 +5,7 @@ OBJECT := build/objects
 BIN := build/bin
 
 all: build main.o snake.o characters.o control.o score.o savedata.o menu.o gameover.o removewindow.o popup.o skin.o money.o shop.o
-	$(CXX) $(CXX_FLAGS) $(OBJECT)/main.o $(OBJECT)/snake.o $(OBJECT)/characters.o $(OBJECT)/control.o $(OBJECT)/score.o $(OBJECT)/savedata.o $(OBJECT)/menu.o $(OBJECT)/gameover.o $(OBJECT)/removewindow.o $(OBJECT)/popup.o $(OBJECT)/skin.o $(OBJECT)/money.o $(OBJECT)/shop.o -L include/ncurses -l ncursesw -o $(BIN)/snake
+	$(CXX) $(CXX_FLAGS) $(OBJECT)/main.o $(OBJECT)/snake.o $(OBJECT)/characters.o $(OBJECT)/control.o $(OBJECT)/score.o $(OBJECT)/savedata.o $(OBJECT)/menu.o $(OBJECT)/gameover.o $(OBJECT)/removewindow.o $(OBJECT)/popup.o $(OBJECT)/skin.o $(OBJECT)/money.o $(OBJECT)/shop.o -L include/ncurses -l ncurses -o $(BIN)/snake
 
 build:
 	if [ ! -d build/objects ] && [ ! -d build/bin ]; then \

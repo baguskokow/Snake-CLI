@@ -10,16 +10,21 @@
 
 #include <iostream>
 #include <fstream>
+#include <stdlib.h>
 #include "../include/snake.hpp"
 
 // Save Score
 void Game::saveData() {
-	//std::string homeDirectory = getenv("HOME");
 	std::ofstream highScore;
 
 	highScore.open("savedata/score.txt", std::ios::out);
 
-	highScore << point;
+	if(highScore.is_open()) {
+		highScore << point;
+	} else {
+		system("touch savedata/score.txt");
+	}
+
 	highScore.close();
 }
 
@@ -43,8 +48,12 @@ void Game::resetData() {
 	std::ofstream highScore;
 
 	highScore.open("savedata/score.txt", std::ios::out);
+	if(highScore.is_open()) {
+		highScore << highestScore;
+	} else {
+		system("touch savedata/score.txt");
+	}
 
-	highScore << highestScore;
 	highScore.close();
 }
 
@@ -53,8 +62,13 @@ void Game::saveDataSkin() {
 	std::ofstream skin;
 
 	skin.open("savedata/skin.txt", std::ios::out);
+	if(skin.is_open()) {
+		skin << skinSelected;
+	} else {
+		system("touch savedata/skin.txt");
+		system("echo 1 > savedata/skin.txt");
+	}
 
-	skin << skinSelected;
 	skin.close();
 }
 
@@ -65,10 +79,13 @@ void Game::readDataSkin() {
 
 	if(skin.is_open()) {
 		getline(skin, skinSelectedString);
-		skin.close();
 	} else {
-		skinSelectedString = '2';
+		system("touch savedata/skin.txt");
+		system("echo 1 > savedata/skin.txt");
+		skinSelectedString = '1';
 	}
+	
+	skin.close();
 	
 	skinSelected = std::stoi(skinSelectedString);
 
@@ -125,7 +142,10 @@ void Game::readDataCollectionSkin() {
 			lineCount++;
 		}
 	} else {
-		std::cerr << "Failed to open file\n";
+		system("touch savedata/collection-skin.txt");
+		system("echo Ziro > savedata/collection-skin.txt");
+		skinCollectionTemporary.push_back(lineString);
+		lineCount++;
 	}
 
 	Collection.close();
@@ -147,7 +167,13 @@ void Game::saveDataCollectionSkin(std::string skinWantToBuy) {
 
 	Collection.open("savedata/collection-skin.txt", std::ios::app);
 
-	Collection << skinWantToBuy;
-	Collection << "\n";
+	if(Collection.is_open()) {
+		Collection << skinWantToBuy;
+		Collection << "\n";
+	} else {
+		system("touch savedata/collection-skin.txt");
+		system("echo Ziro > savedata/collection-skin.txt");
+	}
+
 	Collection.close();
 }
