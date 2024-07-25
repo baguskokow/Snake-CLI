@@ -35,3 +35,9 @@ void Game::removeHighScoreWindow() {
 	wrefresh(BestScoreWindow);
 	box(BestScoreWindow, 0, 0);
 }
+
+void Game::removeShopWindow() {
+	werase(ShopWindow);
+	box(ShopWindow, 0, 0);
+	wrefresh(ShopWindow);
+}

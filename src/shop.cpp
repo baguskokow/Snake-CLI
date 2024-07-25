@@ -78,8 +78,6 @@ bool Game::buySkin() {
                 ZiroSkin();
                 AteSkin();
                 TheGSkin();
-                wrefresh(ShopWindow);
-                //box(ShopWindow, 0, 0);
                 
                 int choice = wgetch(ShopWindow);
 

@@ -102,6 +102,7 @@ void Game::showConfirmPopUp(std::string message, std::string confirmName) {
                       showSuccessPopUp();
                     } else if(Pay(skinIndex.at(skinWantToBuy)) == false) {
                       NotificationPopUp("Not Enough Money!");
+                      removeShopWindow();
                     }
                     exit = true;
               }

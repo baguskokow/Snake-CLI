@@ -150,6 +150,7 @@ class Game {
 		void removeConfirmWindow();
 		void removeSuccessWindow();
 		void removeHighScoreWindow();
+		void removeShopWindow();
 		void resetSnake();
 		void showConfirmPopUp(std::string, std::string);
 		bool showSuccessPopUp();
