@@ -46,21 +46,24 @@ int Game::yHeadRandom() {
 }
 // Inisialization Start Position
 void Game::startPosition() {
+	xBody.resize(1000);
+	yBody.resize(1000);
+	
 	for(int i = 0; i < bodyLength; ++i) {
-		xBody[i] = xHead - i - 1;
-		yBody[i] = yHead;
+		xBody.at(i) = xHead - i - 1;
+		yBody.at(i) = yHead;
 	}
 }
 
 // Update Position Snake
 void Game::UpdatePosition() {
 	for(int i = bodyLength - 1; i > 0; --i) {
-		xBody[i] = xBody[i - 1];
-		yBody[i] = yBody[i - 1];
+		xBody.at(i) = xBody.at(i - 1);
+		yBody.at(i) = yBody.at(i - 1);
 	}
 
-	xBody[0] = xHead;
-	yBody[0] = yHead;
+	xBody.at(0) = xHead;
+	yBody.at(0) = yHead;
 }
 
 // Show Character at Map Window
@@ -68,7 +71,7 @@ void Game::showCharacter(WINDOW* Map) {
 	mvwaddch(Map, yHead, xHead, SnakeHead);
 
 	for(int i = 1; i < bodyLength; i++) {
-		mvwaddch(Map, yBody[i], xBody[i], SnakeBody);
+		mvwaddch(Map, yBody.at(i), xBody.at(i), SnakeBody);
 	}
 }
 
@@ -76,15 +79,30 @@ void Game::showCharacter(WINDOW* Map) {
 void Game::resetSnake() {
 	point = 0;
 	bodyLength = 4;
-	xHead = xHeadRandom(); 
-	yHead = xHead - 1; 
 
-	// Start Position
-	for(int i = 0; i < bodyLength; ++i) {
-		xBody[i] = xHead - i - 1;
-		yBody[i] = yHead;
-	}
+	bool checkingCollison;
+
+
+	// ensure there are no more collisions between the head and the body after the game over
+	do {
+		startPosition();
+		xBody.clear();
+		yBody.clear();
+		xBody.resize(1000, 0);	
+		yBody.resize(1000, 0);
+		xHead = xHeadRandom(); 
+		yHead = xHead - 1; 
+			
+		for(int i = 0; i < bodyLength; i++) {
+			if(xHead != xBody.at(i) && yHead != yBody.at(i)) {
+				checkingCollison = true;
+			} else {
+				checkingCollison = false;
+			}
+		}
+	} while (checkingCollison = false);
 }
+
 
 // Control the Snake Head when it exits the map
 void Game::controlSnakeHead() {

@@ -88,15 +88,24 @@ class Game {
 		int xRandom;
 		
 		// Size xBody & yBody Array
-		int xBody[1000]; // Length of X body array
-		int yBody[1000]; // Length of Y body array
+		//int xBody[1000]; // Length of X body array
+		//int yBody[1000]; // Length of Y body array
+		std::vector<int> xBody;
+		std::vector<int> yBody;
+
+		int xBodyTemp;
+		int yBodyTemp;
+		int xHeadTemp;
+		int yHeadTemp;
+
 
 		// Default Direction
 		int xDirection = 1;
 		int yDirection = 0;
 		
 		// Continue Keypad
-		bool playAgain = true;
+		bool playAgain;
+		//bool gameOver = false;
 
 		// Skin Selected
 		int skinSelected;
@@ -122,6 +131,7 @@ class Game {
 		void UpdateScore(WINDOW*, int);
 		bool render();
 		bool GameOver();
+		bool EnsurePlayAgainOrNot(bool);
 		bool ShowPopUpGameOver();
 		bool Play();
 		void Menu();

@@ -107,10 +107,11 @@ bool Game::render() {
 	keypad(Map, TRUE);
 	nodelay(Map, TRUE);
 	startPosition();
-	bool gameOver = false;
 	bool paused = false;
+	bool gameOver = false;
 	bool exit = false;
 	readDataSkin(); // Read Skin Selected
+	bool checkingStatus;
 
 	while(exit != true) {
 		box(Map, 0, 0);
@@ -171,7 +172,7 @@ bool Game::render() {
 		wrefresh(Score);
 		
 		for(int i = 0; i < bodyLength; ++i) {
-			if(xHead == xBody[i] && yHead == yBody[i]) {
+			if(xHead == xBody.at(i) && yHead == yBody.at(i)) {
 				gameOver = true;
 			}
 		}
@@ -181,23 +182,25 @@ bool Game::render() {
 				box(Map, 0, 0);
 				wrefresh(Map);
 				ShowPopUpGameOver();
+
+				resetSnake();
+
 				readData();
 				if(point > highestScore) {
 					saveData();
 				}
 				
-				//readDataMoney();
 				rewardMoney();
 				saveDataMoney();
 
-				if(playAgain == false) {
-					gameOver = false;
-					exit = true;
+				if(EnsurePlayAgainOrNot(GameOver()) == true){
+						gameOver = false;
 				} else {
-					gameOver = false;	
-					resetSnake();
+						exit = true;
+						gameOver = false;
 				}
 		}
+
 	}
 	return 0;
 }

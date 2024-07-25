@@ -55,17 +55,29 @@ bool Game::GameOver() {
                                 break;
                         case 10:
                                 if(highlight == 0) {
+                                        this->playAgain = true;
                                         exit = true;
-                                        playAgain = true;
                                         break;
                                 } else if(highlight == 1) {
+                                        this->playAgain = false;
                                         exit = true;
-                                        playAgain = false;
                                         break;
                                 }
                         default:
                                 break;
                 }
         }
-        return 0;
+        return playAgain;
+}
+
+bool Game::EnsurePlayAgainOrNot(bool playAgain) {
+        bool result;
+        if(playAgain == true) {
+               // gameOverTemporary = true;
+               result = true;
+        } else {
+                //gameOverTemporary = false;
+               result = false;
+        }
+        return result;
 }
