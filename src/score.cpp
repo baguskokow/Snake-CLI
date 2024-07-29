@@ -28,6 +28,7 @@ void Game::UpdateScore(WINDOW* Score, int pointNow) {
 
 // Show Best Score
 void Game::ShowBestScore() {
+	removeMenuWindow();
 	refresh();
 	curs_set(FALSE);
 	noecho();

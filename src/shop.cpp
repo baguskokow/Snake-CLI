@@ -119,13 +119,13 @@ bool Game::buySkin() {
                         case ' ':
                                 skinWantToBuy = highlight;
                                 if(highlight == 0 && availableQi == 1) {
-                                        showConfirmPopUp("Are you sure you want to buy it?", "buySkin");
+                                        showConfirmPopUp("  Are you sure you want to buy it?", "buySkin");
                                         break;
                                 } else if(highlight == 2 && availableAte == 1) {
-                                        showConfirmPopUp("Are you sure you want to buy it?", "buySkin");
+                                        showConfirmPopUp("  Are you sure you want to buy it?", "buySkin");
                                         break;
                                 } else if(highlight == 3 && availableTheG == 1) {
-                                        showConfirmPopUp("Are you sure you want to buy it?", "buySkin");
+                                        showConfirmPopUp("  Are you sure you want to buy it?", "buySkin");
                                         break;
                                 } else {
                                         break;
