@@ -29,18 +29,20 @@ void Game::showCoin() {
 }
 
 // Reward 
-void Game::rewardMoney() {
+int Game::rewardMoney() {
+	int reward;
 	if(point < 10) {
-		money += 0;
+		reward = 0;
 	} else if(point < 20) {
-		money += 1;
+		reward = 1;
 	} else if(point < 30) {
-		money += 2;
+		reward = 2;
 	} else if(point < 40) {
-		money += 3;
+		reward = 3;
 	} else {
-		money += 4;
+		reward = 4;
 	}
+	return reward;
 }
 
 bool Game::PayProcess(int moneyCurrent, int cost) {

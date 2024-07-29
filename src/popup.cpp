@@ -17,10 +17,15 @@ bool Game::ShowPopUpGameOver() {
   box(GameOverPopUp, 0, 0);
   bool exit = false;
   keypad(GameOverPopUp, TRUE);
+  std::string rewardString = std::to_string(rewardMoney());
 
   while(exit != true) {
-    mvwprintw(GameOverPopUp, 0, 0, "[ q ]");
-    mvwprintw(GameOverPopUp, 4, 6, "[ GAME OVER ]");
+    //rewardString = std::to_string(this->reward);
+    mvwprintw(GameOverPopUp, 0, 1, "[ q ]");
+    mvwprintw(GameOverPopUp, 2, 6, "[ GAME OVER ]");
+    mvwprintw(GameOverPopUp, 5, 8, "< reward >");
+    mvwprintw(GameOverPopUp, 6, 11, "$");
+    mvwprintw(GameOverPopUp, 6, 13, rewardString.c_str());
 
     int choice = wgetch(GameOverPopUp);
 

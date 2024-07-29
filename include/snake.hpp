@@ -117,6 +117,8 @@ class Game {
 		// Money
 		int money = 0;
 		std::string moneyString = std::to_string(money);
+		//int reward;
+		//std::string rewardString;
 		
 		// Index Skin
 		std::vector<std::string> skinIndex = {"Qi", "Ziro", "Ate", "The G"};
@@ -171,7 +173,7 @@ class Game {
 		void saveDataSkin();
 		void readDataSkin();
 		void showCoin();
-		void rewardMoney();
+		int rewardMoney();
 		void saveDataMoney();
 		void readDataMoney();
 		void readDataCollectionSkin();

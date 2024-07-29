@@ -36,7 +36,7 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	// 50 Position Horizontal after Width and + 5 for space
 	
 	// Game Over Pop Up Window
-	this->GameOverPopUp = newwin(9, 25, 6, 12);
+	this->GameOverPopUp = newwin(11, 25, 6, 12);
 
 	// Menu Window
 	this->MenuWindow = newwin(20, 50, 2, 0);
@@ -192,7 +192,8 @@ bool Game::render() {
 					saveData();
 				}
 				
-				rewardMoney();
+				this->money += rewardMoney();
+
 				saveDataMoney();
 
 				if(EnsurePlayAgainOrNot(GameOver()) == true){
