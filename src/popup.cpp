@@ -20,7 +20,6 @@ bool Game::ShowPopUpGameOver() {
   std::string rewardString = std::to_string(rewardMoney());
 
   while(exit != true) {
-    //rewardString = std::to_string(this->reward);
     mvwprintw(GameOverPopUp, 0, 1, "[ q ]");
     mvwprintw(GameOverPopUp, 2, 6, "[ GAME OVER ]");
     mvwprintw(GameOverPopUp, 5, 8, "< reward >");

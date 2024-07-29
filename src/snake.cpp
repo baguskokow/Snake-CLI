@@ -183,6 +183,10 @@ bool Game::render() {
 				werase(Map);
 				box(Map, 0, 0);
 				wrefresh(Map);
+				this->money += rewardMoney();
+				saveDataMoney();
+				showCoin();
+
 				ShowPopUpGameOver();
 
 				resetSnake();
@@ -192,9 +196,6 @@ bool Game::render() {
 					saveData();
 				}
 				
-				this->money += rewardMoney();
-
-				saveDataMoney();
 
 				if(EnsurePlayAgainOrNot(GameOver()) == true){
 						gameOver = false;
