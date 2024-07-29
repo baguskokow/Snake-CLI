@@ -60,12 +60,13 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	this->ShopWindow = newwin(20, 50, 2, 0);
 
 	// Skins Window
+	this->SkinMenuWindow = newwin(20, 50, 2, 0);
 	this->QiSkinWindow = newwin(5, 16, 4, 5);
 	this->ZiroSkinWindow = newwin(5, 16, 4, 28);
 	this->AteSkinWindow = newwin(5, 16, 12, 5);
 	this->TheGSkinWindow = newwin(5, 16, 12, 28);
 
-	// Shadow Map
+	// Shadow Map for selected skin
 	this->ShadowMap = newwin(2, 16, 12, 25);
 
 	// Coin Map
@@ -106,7 +107,8 @@ bool Game::render() {
 	werase(Score);
 	keypad(Map, TRUE);
 	nodelay(Map, TRUE);
-	startPosition();
+	//startPosition();
+	resetSnake();
 	bool paused = false;
 	bool gameOver = false;
 	bool exit = false;
@@ -196,8 +198,8 @@ bool Game::render() {
 				if(EnsurePlayAgainOrNot(GameOver()) == true){
 						gameOver = false;
 				} else {
-						exit = true;
 						gameOver = false;
+						exit = true;
 				}
 		}
 

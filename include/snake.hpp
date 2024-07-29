@@ -42,6 +42,7 @@ class Game {
 		WINDOW *ShadowMap;
 		WINDOW *CoinMap;
 		WINDOW *ShopWindow;
+		WINDOW *SkinMenuWindow;
 		WINDOW *QiSkinWindow;
 		WINDOW *ZiroSkinWindow;
 		WINDOW *AteSkinWindow;
@@ -156,6 +157,7 @@ class Game {
 		void readData();
 		void resetData();
 		void ShowBestScore();
+		void removeMenuWindow();
 		void removeScoreWindow();
 		void removeConfirmWindow();
 		void removeSuccessWindow();

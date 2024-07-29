@@ -41,3 +41,9 @@ void Game::removeShopWindow() {
 	box(ShopWindow, 0, 0);
 	wrefresh(ShopWindow);
 }
+
+void Game::removeMenuWindow() {
+	werase(MenuWindow);
+	box(MenuWindow, 0, 0);
+	wrefresh(MenuWindow);
+}

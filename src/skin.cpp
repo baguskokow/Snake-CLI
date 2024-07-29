@@ -19,16 +19,14 @@ bool Game::chooseSkin() {
         int skinCollectionCount = sizeof(skinCollection) / sizeof(skinCollection[0]);
         std::vector<std::string> ensureSkinCollectionHaveValue {"False", "False", "False", "False"};
         std::string listMenu[4] = {"!Qi", "!Ziro", "!Ate", "!The G"};
-        box(Map, 0, 0);
+        box(SkinMenuWindow, 0, 0);
         bool exit = false;
-        keypad(Map, TRUE);
-        //int highlight = 0;
+        keypad(SkinMenuWindow, TRUE);
         int yMenuWindow[5] = {4, 6, 8, 10, 12};
         int xMenuWindow[5] = {7, 7, 7, 7, 7};
-        //int selectedSkin = 1; // start index from 0
         SkinPreview();
-        wrefresh(Map);
-        wrefresh(ShadowMap);
+        wrefresh(SkinMenuWindow);
+        //wrefresh(ShadowMap);
         readDataCollectionSkin();
 
         while(exit != true) {
@@ -38,25 +36,25 @@ bool Game::chooseSkin() {
                 // Print skin collection by collection skin data
                 for(int i = 0; i < skinCollectionCount; i++){
                         if(skinCollection[i] == "Qi" || skinCollection[i] == "Ziro" || skinCollection[i] == "Ate" || skinCollection[i] == "The G") {
-                                mvwprintw(Map, yMenuWindow[i], xMenuWindow[i], skinCollection[i].c_str());
+                                mvwprintw(SkinMenuWindow, yMenuWindow[i], xMenuWindow[i], skinCollection[i].c_str());
                         } else {
-                                wrefresh(Map);
-                                mvwprintw(Map, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
+                                wrefresh(SkinMenuWindow);
+                                mvwprintw(SkinMenuWindow, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
                         }
                 }
 
-                mvwprintw(Map, 0, 1, "[ q ]");
-                mvwprintw(Map, 18, 15, "Press Space To Select");
+                mvwprintw(SkinMenuWindow, 0, 1, "[ q ]");
+                mvwprintw(SkinMenuWindow, 18, 15, "Press Space To Select");
 
                for(int i = 0; i < 4; i++) {
                        if(i == highlight) {
-                               wattron(Map, A_REVERSE);
+                               wattron(SkinMenuWindow, A_REVERSE);
                                if(skinCollection[i] == "Qi" || skinCollection[i] == "Ziro" || skinCollection[i] == "Ate" || skinCollection[i] == "The G") {
-                                       mvwprintw(Map, yMenuWindow[i], xMenuWindow[i], skinCollection[i].c_str());
+                                       mvwprintw(SkinMenuWindow, yMenuWindow[i], xMenuWindow[i], skinCollection[i].c_str());
                                } else {
-                                       mvwprintw(Map, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
+                                       mvwprintw(SkinMenuWindow, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());
                                }
-                               wattroff(Map, A_REVERSE);
+                               wattroff(SkinMenuWindow, A_REVERSE);
                        }
                }
                 
@@ -85,7 +83,7 @@ bool Game::chooseSkin() {
                 // Show Preview
                 SkinPreview();
 
-                int choice = wgetch(Map);
+                int choice = wgetch(SkinMenuWindow);
 
                 switch(choice) {
                         case KEY_UP:
@@ -107,15 +105,17 @@ bool Game::chooseSkin() {
                                 saveDataSkin();
                                 break;
                         case 'q':
+                                werase(SkinMenuWindow);
+                                refresh();
                                 exit = true;
                         default:
                                 break;
                 }
                
-          werase(Map);
-          box(Map, 0, 0);
-          refresh();
-          wrefresh(Map);
+          //werase(Map);
+          //box(Map, 0, 0);
+          //refresh();
+          //wrefresh(Map);
                 
         }
         
