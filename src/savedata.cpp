@@ -16,13 +16,14 @@
 // Save Score
 void Game::saveData() {
 	std::ofstream highScore;
+	std::string command = "touch " + workDir + "score.txt";
 
-	highScore.open("savedata/score.txt", std::ios::out);
+	highScore.open(workDir + "score.txt", std::ios::out);
 
 	if(highScore.is_open()) {
 		highScore << point;
 	} else {
-		system("touch savedata/score.txt");
+		system(command.c_str());
 	}
 
 	highScore.close();
@@ -30,13 +31,17 @@ void Game::saveData() {
 
 // Read
 void Game::readData() {
-	std::ifstream bestScore("savedata/score.txt");
+	std::ifstream bestScore(workDir + "score.txt");
+	std::string command = "touch " + workDir + "score.txt";
+	std::string secondCommand = "echo 0 > " + workDir + "score.txt";
 
 	if(bestScore.is_open()) {
 		getline(bestScore, highScoreString);
 		bestScore.close();
 	} else {
 		highScoreString = '0';
+		system(command.c_str());
+		system(secondCommand.c_str());
 	}
 	
 	highestScore = std::stoi(highScoreString);
@@ -46,12 +51,13 @@ void Game::readData() {
 void Game::resetData() {
 	this->highestScore = 0;
 	std::ofstream highScore;
+	std::string command = "touch " + workDir + "score.txt";
 
-	highScore.open("savedata/score.txt", std::ios::out);
+	highScore.open(workDir + "score.txt", std::ios::out);
 	if(highScore.is_open()) {
 		highScore << highestScore;
 	} else {
-		system("touch savedata/score.txt");
+		system(command.c_str());
 	}
 
 	highScore.close();
@@ -60,13 +66,15 @@ void Game::resetData() {
 // Save Skin
 void Game::saveDataSkin() {
 	std::ofstream skin;
+	std::string command = "touch " + workDir + "skin.txt";
+	std::string secondCommand = "echo 1 > " + workDir + "skin.txt";
 
-	skin.open("savedata/skin.txt", std::ios::out);
+	skin.open(workDir + "skin.txt", std::ios::out);
 	if(skin.is_open()) {
 		skin << skinSelected;
 	} else {
-		system("touch savedata/skin.txt");
-		system("echo 1 > savedata/skin.txt");
+		system(command.c_str());
+		system(secondCommand.c_str());
 	}
 
 	skin.close();
@@ -74,14 +82,16 @@ void Game::saveDataSkin() {
 
 // Read Skin
 void Game::readDataSkin() {
-	std::ifstream skin("savedata/skin.txt");
+	std::ifstream skin(workDir + "skin.txt");
+	std::string command = "touch " + workDir + "skin.txt";
+	std::string secondCommand = "echo 1 > " + workDir + "skin.txt";
 	std::string skinSelectedString;
 
 	if(skin.is_open()) {
 		getline(skin, skinSelectedString);
 	} else {
-		system("touch savedata/skin.txt");
-		system("echo 1 > savedata/skin.txt");
+		system(command.c_str());
+		system(secondCommand.c_str());
 		skinSelectedString = '1';
 	}
 	
@@ -107,7 +117,7 @@ void Game::readDataSkin() {
 void Game::saveDataMoney() {
 	std::ofstream Money;
 
-	Money.open("savedata/money.txt", std::ios::out);
+	Money.open(workDir + "money.txt", std::ios::out);
 
 	Money << this->money;
 	Money.close();
@@ -115,7 +125,7 @@ void Game::saveDataMoney() {
 
 // Read Data Money
 void Game::readDataMoney() {
-	std::ifstream Money("savedata/money.txt");
+	std::ifstream Money(workDir + "money.txt");
 
 	if(Money.is_open()) {
 		getline(Money, moneyString);
@@ -129,11 +139,12 @@ void Game::readDataMoney() {
 
 // Read Collection Skin
 void Game::readDataCollectionSkin() {
-	std::string fileName = "savedata/collection-skin.txt";
 	std::string lineString;
 	int lineCount = 0;
+	std::string command = "touch " + workDir + "collection-skin.txt";
+	std::string secondCommand = "echo Ziro > " + workDir + "collection-skin.txt";
 
-	std::ifstream Collection(fileName);
+	std::ifstream Collection(workDir + "collection-skin.txt");
 	std::vector<std::string> skinCollectionTemporary;
 
 	if(Collection.is_open()) {
@@ -142,8 +153,8 @@ void Game::readDataCollectionSkin() {
 			lineCount++;
 		}
 	} else {
-		system("touch savedata/collection-skin.txt");
-		system("echo Ziro > savedata/collection-skin.txt");
+		system(command.c_str());
+		system(secondCommand.c_str());
 		skinCollectionTemporary.push_back(lineString);
 		lineCount++;
 	}
@@ -164,15 +175,17 @@ void Game::readDataCollectionSkin() {
 // Save data collection skin after buy a skin at shop
 void Game::saveDataCollectionSkin(std::string skinWantToBuy) {
 	std::ofstream Collection;
+	std::string command = "touch " + workDir + "collection-skin.txt";
+	std::string secondCommand = "echo Ziro > " + workDir + "collection-skin.txt";
 
-	Collection.open("savedata/collection-skin.txt", std::ios::app);
+	Collection.open(workDir + "collection-skin.txt", std::ios::app);
 
 	if(Collection.is_open()) {
 		Collection << skinWantToBuy;
 		Collection << "\n";
 	} else {
-		system("touch savedata/collection-skin.txt");
-		system("echo Ziro > savedata/collection-skin.txt");
+		system(command.c_str());
+		system(secondCommand.c_str());
 	}
 
 	Collection.close();

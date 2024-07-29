@@ -60,7 +60,7 @@ class Game {
 
 		// Default Point
 		int point = 0;
-		std::string lastPoint = std::to_string(point);
+		//std::string lastPoint = std::to_string(point);
 		int highestScore;
 		std::string highScoreString = std::to_string(highestScore);
 
@@ -128,6 +128,9 @@ class Game {
 
 		// Skin Want To Buy It
 		int skinWantToBuy = 0;
+
+		const char* homeDir;
+		std::string workDir;
 
 	public:	
 		Game(int, int, int, int, const char*);

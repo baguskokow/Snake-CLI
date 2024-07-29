@@ -60,7 +60,7 @@ void Game::showConfirmPopUp(std::string message, std::string confirmName) {
      
      while(exit != true) {
         //mvwprintw(ConfirmWindow, 2, 2, "Are you sure to reset the high score?");
-        mvwprintw(ConfirmWindow, 2, 4, message.c_str());
+        mvwprintw(ConfirmWindow, 2, 2, message.c_str());
 
 	      for(int i = 0; i < 2; i++){
 	        	mvwprintw(ConfirmWindow, yMenuWindow[i], xMenuWindow[i], listMenu[i].c_str());

@@ -87,6 +87,11 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	this->xHead = xHeadRandom();
 	this->yHead = yHeadRandom();
 	readDataMoney();
+
+	// Setup Wordir for savedata
+	const char* homeDir = getenv("HOME");
+	workDir.append(homeDir);
+	workDir += "/.snake/savedata/";
 }
 
 // Get Row Size of Terminal
@@ -186,15 +191,17 @@ bool Game::render() {
 				this->money += rewardMoney();
 				saveDataMoney();
 				showCoin();
+				
+				readData();
+
+				if(point > highestScore) {
+					saveData();
+				}
 
 				ShowPopUpGameOver();
 
 				resetSnake();
 
-				readData();
-				if(point > highestScore) {
-					saveData();
-				}
 				
 
 				if(EnsurePlayAgainOrNot(GameOver()) == true){
@@ -204,7 +211,6 @@ bool Game::render() {
 						exit = true;
 				}
 		}
-
 	}
 	return 0;
 }
