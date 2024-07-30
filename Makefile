@@ -53,8 +53,20 @@ shop.o:
 	$(CXX) -c src/shop.cpp $(CXX_FLAGS) -o $(OBJECT)/shop.o
 
 install:
+	@echo "Installing..."
 	@sudo cp $(BIN)/snake /usr/local/bin/snake
-	@mkdir -p ${HOME}/.snake-cli/save
+	if [ ! -d $${HOME}/.snake/savedata ]; then \
+    mkdir -p $${HOME}/.snake/savedata; \
+	fi
+	@echo "Success"
+
+uninstall:
+	@echo "Uninstalling..."
+	@sudo rm /usr/local/bin/snake
+	if [ -d $${HOME}/.snake/ ]; then \
+    rm -rf $${HOME}/.snake/; \
+	fi
+	@echo "Success"
 
 clean:
 	@echo "Clearing..."
