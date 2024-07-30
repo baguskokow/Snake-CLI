@@ -1,8 +1,11 @@
 
 # Snake-CLI
 Snake CLI is a free and open-source snake game that runs in the terminal, written using C++ and ncurses library; while some people might say, "Working in the terminal is so boring," now there's no more "boring" when you're working in the terminal because you can play the snake game on your Linux desktop or Linux server!
+<br>
 
-// video game
+<video loop src="docs/demo-video.mp4"></video>
+
+<br>
 
 ## Installation
 
@@ -18,7 +21,7 @@ $ wget ....
 ```
 - Install 
 ```
-$ sudo dpkg -i snake-cli.deb
+$ sudo dpkg -i snake-cli_1.0.0.deb
 ```
 
 ### From Source
