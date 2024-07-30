@@ -185,9 +185,11 @@ bool Game::render() {
 		}
 
 		if(gameOver == true) {
+				usleep(100000);
 				werase(Map);
 				box(Map, 0, 0);
 				wrefresh(Map);
+
 				this->money += rewardMoney();
 				saveDataMoney();
 				showCoin();
