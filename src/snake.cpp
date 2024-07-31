@@ -45,7 +45,7 @@ Game::Game(int height, int width, int windowVerticalPosition, int windowHorizont
 	this->GameOverWindow = newwin(20, 50, 2, 0);
 	
 	// High Score Window
-	this->BestScoreWindow = newwin(8, 25, 6, 12);
+	this->HighestScoreWindow = newwin(8, 25, 6, 12);
 
 	// Confirm Reset High Score
 	this->ConfirmWindow = newwin(10, 41, 5, 5.5);
@@ -112,7 +112,6 @@ bool Game::render() {
 	werase(Score);
 	keypad(Map, TRUE);
 	nodelay(Map, TRUE);
-	//startPosition();
 	resetSnake();
 	bool paused = false;
 	bool gameOver = false;
@@ -174,7 +173,8 @@ bool Game::render() {
 		
 		UpdateScore(Score, point);
 		
-		usleep(120000); // miliseconds
+		speed(); // Update speed base on point
+
 		wrefresh(Map);
 		wrefresh(Score);
 		
@@ -203,8 +203,6 @@ bool Game::render() {
 				ShowPopUpGameOver();
 
 				resetSnake();
-
-				
 
 				if(EnsurePlayAgainOrNot(GameOver()) == true){
 						gameOver = false;

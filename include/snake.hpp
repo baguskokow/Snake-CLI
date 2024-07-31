@@ -34,7 +34,7 @@ class Game {
 		WINDOW *Score;
 		WINDOW *GameOverPopUp;
 		WINDOW *MenuWindow;
-		WINDOW *BestScoreWindow;
+		WINDOW *HighestScoreWindow;
 		WINDOW *GameOverWindow;
 		WINDOW *ConfirmWindow;
 		WINDOW *SuccessWindow;
@@ -60,7 +60,6 @@ class Game {
 
 		// Default Point
 		int point = 0;
-		//std::string lastPoint = std::to_string(point);
 		int highestScore;
 		std::string highScoreString = std::to_string(highestScore);
 
@@ -73,7 +72,7 @@ class Game {
 		int columnTerminal;
 
 		// Characters
-		char Food= '*'; // Food Character
+		char Food = '*'; // Food Character
 		char SnakeHead; // Snake Head
 		char SnakeBody = '+'; // Snake Body
 
@@ -89,16 +88,8 @@ class Game {
 		int xRandom;
 		
 		// Size xBody & yBody Array
-		//int xBody[1000]; // Length of X body array
-		//int yBody[1000]; // Length of Y body array
 		std::vector<int> xBody;
 		std::vector<int> yBody;
-
-		int xBodyTemp;
-		int yBodyTemp;
-		int xHeadTemp;
-		int yHeadTemp;
-
 
 		// Default Direction
 		int xDirection = 1;
@@ -106,19 +97,16 @@ class Game {
 		
 		// Continue Keypad
 		bool playAgain;
-		//bool gameOver = false;
 
 		// Skin Selected
 		int skinSelected;
 
 		// Highlight Menu (Global Variable)
-		int highlight = 0;
+		int highlightSkinMenu = 0;
 
 		// Money
 		int money = 0;
 		std::string moneyString = std::to_string(money);
-		//int reward;
-		//std::string rewardString;
 		
 		// Index Skin
 		std::vector<std::string> skinIndex = {"Qi", "Ziro", "Ate", "The G"};
@@ -129,6 +117,7 @@ class Game {
 		// Skin Want To Buy It
 		int skinWantToBuy = 0;
 
+		// Define homeDir & workDir
 		const char* homeDir;
 		std::string workDir;
 
@@ -156,12 +145,13 @@ class Game {
 		void mvRight();
 		void mvLeft();
 		void directionControl();
+		void speed();
 		int getRowTerminalSize();
 		int getColumnTerminalSize();
 		void saveData();
 		void readData();
 		void resetData();
-		void ShowBestScore();
+		void ShowHighestScore();
 		void removeMenuWindow();
 		void removeScoreWindow();
 		void removeConfirmWindow();

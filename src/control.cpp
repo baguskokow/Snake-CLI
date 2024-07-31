@@ -47,3 +47,17 @@ void Game::directionControl() {
 		xHead--;
 	}
 }
+
+void Game::speed() {
+	if(this->point < 20) {
+		usleep(130000);
+	} else if (this->point < 30) {
+		usleep(120000);
+	} else if (this->point < 40) {
+		usleep(110000);
+	} else if (this->point < 50) {
+		usleep(100000);
+	} else  {
+		usleep(90000);
+	}
+}
