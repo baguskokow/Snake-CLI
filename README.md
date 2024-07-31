@@ -1,21 +1,21 @@
-
 # Snake-CLI  
-Snake CLI is a free and open-source snake game that runs in the terminal, written using C++ and ncurses library; while some people might say, "Working in the terminal is so boring," now there's no more "boring" when you're working in the terminal because you can play the snake game on your Linux desktop or Linux server!  
-<br>
+Snake CLI is a free and open-source snake game that runs in the terminal, written using C++ and ncurses library; while some people might say, "Working in the terminal is so boring," now there's no more "boring"  
+when you're working in the terminal because you can play the snake game on your Linux desktop or Linux server!  
+<br>  
   
-[<video loop src="docs/demo-video.mp4"></video>](https://github.com/user-attachments/assets/1452071c-eecb-4e1c-97f4-4ff1c8fae35b)
+[<video loop src="docs/demo-video.mp4"></video>](https://github.com/user-attachments/assets/1452071c-eecb-4e1c-97f4-4ff1c8fae35b)  
   
 ## Installation  
   
 ### From Package  
-##### Ubuntu  
+###### Ubuntu  (Focal & Jammy)
 - Install ncurses library  
 ```  
 $ sudo apt install libncurses5-dev libncursesw5-dev  
 ```  
-- Download package snake-cli.deb  
+- Download package
 ```  
-$ wget ....  
+$ wget https://github.com/baguskokow/Snake-CLI/releases/download/v1.0.0/snake-cli_1.0.0_amd64.deb
 ```  
 - Install  
 ```  
@@ -32,9 +32,9 @@ $ sudo apt install libncurses5-dev libncursesw5-dev
 ```  
 $ sudo zypper install ncurses-devel  
 ```  
-
-> Note : <br>
-> For other distros, you can install the ncurses library using their package manager.
+  
+> Note : <br>  
+> For other distros, you can install the ncurses library using their package manager.  
   
 - Clone the repository  
 ```  
@@ -49,15 +49,15 @@ $ make
 ```  
 $ make install  
 ```  
-- Clean up build files
-```
-$ make clean
-```
-- Uninstall
-```
-$ make uninstall
-```
-
+- Clean up build files  
+```  
+$ make clean  
+```  
+- Uninstall  
+```  
+$ make uninstall  
+```  
+  
   
 ## Usage  
 - Run Game  
@@ -74,4 +74,3 @@ $ snake
 - <kbd>ENTER</kbd> to select menu  
 - <kbd>q</kbd> to quit from menu  
 - <kbd>r</kbd> to reset highest score
-
