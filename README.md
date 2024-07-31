@@ -19,7 +19,7 @@ $ wget https://github.com/baguskokow/Snake-CLI/releases/download/v1.0.0/snake-cl
 ```  
 - Install  
 ```  
-$ sudo dpkg -i snake-cli_1.0.0.deb  
+$ sudo dpkg -i snake-cli_1.0.0_amd64.deb  
 ```  
   
 ### From Source  
