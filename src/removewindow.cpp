@@ -1,6 +1,6 @@
 /* #########################################
  *	
- *	File: control.cpp
+ *	File: removewindow.cpp
  *
  *	Author : Bagus Koko Wibawanto
  *
@@ -31,9 +31,9 @@ void Game::removeSuccessWindow() {
 }
 
 void Game::removeHighScoreWindow() {
-	werase(BestScoreWindow);
-	wrefresh(BestScoreWindow);
-	box(BestScoreWindow, 0, 0);
+	werase(HighestScoreWindow);
+	wrefresh(HighestScoreWindow);
+	box(HighestScoreWindow, 0, 0);
 }
 
 void Game::removeShopWindow() {

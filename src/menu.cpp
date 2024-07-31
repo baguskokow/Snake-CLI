@@ -65,7 +65,7 @@ void Game::Menu() {
 				} else if(highlight == 1) {
 					buySkin();
 				} else if(highlight == 2) {
-					ShowBestScore();
+					ShowHighestScore();
 				} else if(highlight == 3) {
 					chooseSkin();
 				} else {

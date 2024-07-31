@@ -32,7 +32,6 @@ bool Game::ShowPopUpGameOver() {
       case 'q':
         exit = true;
         removeScoreWindow();
-        //GameOver();
         break;
       default:
         break;

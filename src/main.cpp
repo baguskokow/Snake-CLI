@@ -28,14 +28,6 @@ int main() {
 		}
 
 		Map->Menu();
-		//Map->chooseSkin();
-	//	Map->buySkin();
-		//Map->vSkin();
-		//Map->showSuccessPopUp();
-		//Map->showConfirmPopUp();
-		//Map->render();
-//		Map->GameOver();
-	//	Map->ShowPopUpGameOver();
 	}
 
 	catch(const char* error) {

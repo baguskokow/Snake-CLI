@@ -26,7 +26,6 @@ bool Game::chooseSkin() {
         int xMenuWindow[5] = {7, 7, 7, 7, 7};
         SkinPreview();
         wrefresh(SkinMenuWindow);
-        //wrefresh(ShadowMap);
         readDataCollectionSkin();
 
         while(exit != true) {
@@ -47,7 +46,7 @@ bool Game::chooseSkin() {
                 mvwprintw(SkinMenuWindow, 18, 15, "Press Space To Select");
 
                for(int i = 0; i < 4; i++) {
-                       if(i == highlight) {
+                       if(i == highlightSkinMenu) {
                                wattron(SkinMenuWindow, A_REVERSE);
                                if(skinCollection[i] == "Qi" || skinCollection[i] == "Ziro" || skinCollection[i] == "Ate" || skinCollection[i] == "The G") {
                                        mvwprintw(SkinMenuWindow, yMenuWindow[i], xMenuWindow[i], skinCollection[i].c_str());
@@ -62,7 +61,7 @@ bool Game::chooseSkin() {
                 readDataSkin();
 
                 // Show Detail Selected Skin
-               if(skinSelected == highlight) {
+               if(skinSelected == highlightSkinMenu) {
                        for(int i = 0; i < skinCollectionCount; i++) {
                                if(skinCollection[i] == "Qi" || skinCollection[i] == "Ziro" || skinCollection[i] == "Ate" || skinCollection[i] == "The G") {
                                        ensureSkinCollectionHaveValue.at(i) = "True";
@@ -87,21 +86,21 @@ bool Game::chooseSkin() {
 
                 switch(choice) {
                         case KEY_UP:
-                                if(highlight == 0) {
-                                        highlight = 0;
+                                if(highlightSkinMenu == 0) {
+                                        highlightSkinMenu = 0;
                                         break;
                                 }
-                                highlight--;
+                                highlightSkinMenu--;
                                 break;
                         case KEY_DOWN:
-                                if(highlight == skinCollectionCount - 1) {
-                                        highlight = skinCollectionCount - 1;
+                                if(highlightSkinMenu == skinCollectionCount - 1) {
+                                        highlightSkinMenu = skinCollectionCount - 1;
                                         break;
                                 }
-                                highlight++;
+                                highlightSkinMenu++;
                                 break;
                         case ' ':
-                                skinSelected = highlight;
+                                skinSelected = highlightSkinMenu;
                                 saveDataSkin();
                                 break;
                         case 'q':
@@ -111,12 +110,6 @@ bool Game::chooseSkin() {
                         default:
                                 break;
                 }
-               
-          //werase(Map);
-          //box(Map, 0, 0);
-          //refresh();
-          //wrefresh(Map);
-                
         }
         
         // At below, change head snake that use when playing game
@@ -136,13 +129,13 @@ bool Game::chooseSkin() {
 bool Game::SkinPreview() {
         werase(SkinPreviewWindow);
         box(SkinPreviewWindow, 0, 0);
-        if(highlight == 0) {
+        if(highlightSkinMenu == 0) {
                 mvwprintw(SkinPreviewWindow, 2, 6, "Q+++");
-        } else if(highlight == 1) {
+        } else if(highlightSkinMenu == 1) {
                 mvwprintw(SkinPreviewWindow, 2, 6, "0+++");
-        } else if(highlight == 2) {
+        } else if(highlightSkinMenu == 2) {
                 mvwprintw(SkinPreviewWindow, 2, 6, "@+++");
-        } else if(highlight == 3) {
+        } else if(highlightSkinMenu == 3) {
                 mvwprintw(SkinPreviewWindow, 2, 6, "G+++");
         } 
 

@@ -27,25 +27,25 @@ void Game::UpdateScore(WINDOW* Score, int pointNow) {
 }
 
 // Show Best Score
-void Game::ShowBestScore() {
+void Game::ShowHighestScore() {
 	removeMenuWindow();
 	refresh();
 	curs_set(FALSE);
 	noecho();
-	box(BestScoreWindow, 0, 0);
-	wrefresh(BestScoreWindow);
-	keypad(BestScoreWindow, TRUE);
+	box(HighestScoreWindow, 0, 0);
+	wrefresh(HighestScoreWindow);
+	keypad(HighestScoreWindow, TRUE);
 	readData();
 	bool exit = false;
 
 	while(exit != true) {
-		mvwprintw(BestScoreWindow, 0, 0, "[ q ]");
-		mvwprintw(BestScoreWindow, 0, 6, "[ r ]");
-		mvwprintw(BestScoreWindow, 2, 7, "High Score");
-		mvwprintw(BestScoreWindow, 4, 11, highScoreString.c_str());
+		mvwprintw(HighestScoreWindow, 0, 0, "[ q ]");
+		mvwprintw(HighestScoreWindow, 0, 6, "[ r ]");
+		mvwprintw(HighestScoreWindow, 2, 7, "High Score");
+		mvwprintw(HighestScoreWindow, 4, 11, highScoreString.c_str());
 		refresh();
 
-		int choice = wgetch(BestScoreWindow);
+		int choice = wgetch(HighestScoreWindow);
 
 		switch(choice) {
 			case 'q':
@@ -58,6 +58,6 @@ void Game::ShowBestScore() {
 				break;
 		}
 	
-		box(BestScoreWindow, 0, 0);
+		box(HighestScoreWindow, 0, 0);
 	}
 }

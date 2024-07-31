@@ -1,6 +1,6 @@
 /* #########################################
  *	
- *	File: shop.cpp
+ *	File: menu.cpp
  *
  *	Author : Bagus Koko Wibawanto
  *
@@ -18,7 +18,6 @@ void Game::showCoin() {
 	werase(CoinMap);
 	box(CoinMap, 0, 0);
 	noecho();
-	//moneyString = std::to_string(money);
 
 	mvwprintw(CoinMap, 1, 4, "[ $      ");
 	mvwprintw(CoinMap, 1, 9, moneyString.c_str());
@@ -39,12 +38,25 @@ int Game::rewardMoney() {
 		reward = 2;
 	} else if(point < 40) {
 		reward = 3;
-	} else {
+	} else if(point < 50) {
 		reward = 4;
+	} else if(point < 60) {
+		reward = 5;
+	} else if(point < 70) {
+		reward = 6;
+	} else if(point < 80) {
+		reward = 7;
+	} else if(point < 90) {
+		reward = 8;
+	} else if(point < 100) {
+		reward = 9;
+	} else {
+		reward = 10;
 	}
 	return reward;
 }
 
+// Payment Process
 bool Game::PayProcess(int moneyCurrent, int cost) {
 	bool success;
 	int resultMoney;

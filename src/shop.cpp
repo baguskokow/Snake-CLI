@@ -1,6 +1,6 @@
 /* #########################################
  *	
- *	File: skin.cpp
+ *	File: shop.cpp
  *
  *	Author : Bagus Koko Wibawanto
  *

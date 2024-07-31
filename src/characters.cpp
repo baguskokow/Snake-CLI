@@ -44,6 +44,7 @@ int Game::yHeadRandom() {
 		return yRandom;
 	}
 }
+
 // Inisialization Start Position
 void Game::startPosition() {
 	xBody.resize(1000);
@@ -81,7 +82,6 @@ void Game::resetSnake() {
 	bodyLength = 4;
 
 	bool checkingCollison;
-
 
 	// ensure there are no more collisions between the head and the body after the game over
 	do {
